@@ -1,0 +1,39 @@
+{
+  "dependencies": {
+    "@apollo/client": "3.1.2",
+    "@package/storefront": "workspace:*",
+    "@package/utilities": "workspace:*",
+    "cross-fetch": "3.0.5",
+    "dotenv": "8.2.0",
+    "graphql": "15.3.0",
+    "graphql-request": "2.1.0-next.1",
+    "koa": "2.13.0",
+    "local": "link:./build",
+    "multistream": "4.0.0",
+    "purify-ts": "0.16.0-beta.5",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "styled-components": "5.1.1"
+  },
+  "devDependencies": {
+    "@testing-library/react": "10.4.7",
+    "@types/jsdom": "16.2.3",
+    "@types/koa": "2.11.3",
+    "@types/mustache": "4.0.1",
+    "@types/react": "16.9.43",
+    "@types/react-dom": "16.9.8",
+    "@types/styled-components": "5.1.2",
+    "@yarnpkg/pnpify": "^2.1.0",
+    "ava": "3.11.1",
+    "jsdom": "16.3.0",
+    "serverless": "1.77.1",
+    "serverless-offline": "6.5.0"
+  },
+  "main": "build/handler.js",
+  "name": "@package/page-service",
+  "private": true,
+  "scripts": {
+    "dev": "tsc -b -w",
+    "start": "nodemon build/handler.js"
+  }
+}

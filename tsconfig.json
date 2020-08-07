@@ -1,0 +1,9 @@
+{
+  "files": [],
+  "references": [
+    { "path": "./packages/data-service" },
+    { "path": "./packages/page-service" },
+    { "path": "./packages/storefront" },
+    { "path": "./packages/utilities" },
+  ]
+}

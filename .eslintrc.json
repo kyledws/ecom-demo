@@ -1,0 +1,43 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "createDefaultProgram": true
+  },
+  "env": {
+    "es6": true
+  },
+  "plugins": ["@typescript-eslint", "ava", "functional", "react"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:ava/recommended",
+    "plugin:functional/external-recommended",
+    "plugin:functional/recommended",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "functional/no-conditional-statement": "off",
+    "functional/no-expression-statement": "off",
+    "functional/functional-parameters": "off",
+    "no-magic-numbers": "off",
+    "@typescript-eslint/no-magic-numbers": "error",
+    "@typescript-eslint/prefer-for-of": "error",
+    "@typescript-eslint/prefer-optional-chain": "error",
+    "no-return-await": "off",
+    "@typescript-eslint/return-await": "error"
+  },
+  "ignorePatterns": [
+    "ava.config.js",
+    "packages/*/build/*",
+    "packages/*/dist/*",
+    "packages/*/src/generated/*",
+    "webpack.config.js"
+  ],
+  "settings": {
+    "react": {
+      "version": "16.13"
+    }
+  }
+}

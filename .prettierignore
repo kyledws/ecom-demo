@@ -1,0 +1,5 @@
+tsconfig.json
+tsconfig.base.json
+packages/*/build
+packages/*/dist
+packages/*/src/generated

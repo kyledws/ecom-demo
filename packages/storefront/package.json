@@ -1,0 +1,30 @@
+{
+  "dependencies": {
+    "@apollo/client": "3.1.2",
+    "graphql": "15.3.0",
+    "local": "link:./build",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "styled-components": "5.1.1"
+  },
+  "devDependencies": {
+    "@testing-library/react": "10.4.7",
+    "@types/jsdom": "16.2.3",
+    "@types/react": "16.9.43",
+    "@types/react-dom": "16.9.8",
+    "@types/styled-components": "5.1.2",
+    "ava": "3.11.1",
+    "jsdom": "16.3.0",
+    "source-map-loader": "1.0.1",
+    "webpack": "next",
+    "webpack-cli": "3.3.12"
+  },
+  "private": true,
+  "main": "build/entry.js",
+  "name": "@package/storefront",
+  "scripts": {
+    "dev": "tsc -b -w",
+    "pack": "webpack-cli",
+    "host": "node build/static.js"
+  }
+}

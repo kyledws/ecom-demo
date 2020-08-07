@@ -1,0 +1,12 @@
+schema {
+  query: Query
+}
+
+type Query {
+  page(fullSlug: String!): Page
+}
+
+type Page {
+  title: String!
+  type: String!
+}

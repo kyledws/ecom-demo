@@ -1,0 +1,40 @@
+{
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "3.8.0",
+    "@typescript-eslint/parser": "3.8.0",
+    "ava": "3.11.1",
+    "eslint": "7.6.0",
+    "eslint-config-prettier": "6.11.0",
+    "eslint-plugin-ava": "10.5.0",
+    "eslint-plugin-functional": "3.0.1",
+    "eslint-plugin-react": "7.20.5",
+    "nodemon": "2.0.4",
+    "prettier": "2.0.5",
+    "typescript": "3.9.7"
+  },
+  "name": "caching",
+  "private": true,
+  "scripts": {
+    "build:watch": "tsc -b -w",
+    "build:clean": "tsc -b --clean",
+    "dev:data": "yarn workspace @package/data-service run dev",
+    "dev:page": "yarn workspace @package/page-service run dev",
+    "dev:storefront": "yarn workspace @package/storefront run dev",
+    "generate": "yarn workspace @package/data-service run generate",
+    "lint": "eslint packages/*/src/**/*.{ts,tsx}",
+    "format": "prettier --write packages/*/src/**/*.{ts,tsx}",
+    "host": "yarn workspace @package/storefront run host",
+    "pack:storefront": "yarn workspace @package/storefront run pack",
+    "start:data": "yarn workspace @package/data-service run start",
+    "start:page": "yarn workspace @package/page-service run start",
+    "test": "ava"
+  },
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependenciesMeta": {
+    "serverless-offline": {
+      "unplugged": true
+    }
+  }
+}

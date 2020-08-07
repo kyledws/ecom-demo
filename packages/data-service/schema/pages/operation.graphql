@@ -1,0 +1,10 @@
+query getPage($fullSlug: String!) {
+  page(fullSlug: $fullSlug) {
+    ...PageFields
+  }
+}
+
+fragment PageFields on Page {
+  layout
+  type
+}
