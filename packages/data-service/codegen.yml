@@ -1,23 +1,18 @@
 overwrite: true
+
+config:
+  avoidOptionals: true
+  immutableTypes: true
+  skipTypename: true
+  preResolveTypes: true
+
 generates:
-  src/generated/data-service.d.ts:
-    schema: "schema/**/*.graphql"
+  src/generated/schema/index.d.ts:
     plugins:
       - "typescript"
-      - "typescript-operations"
       - "typescript-resolvers"
-    config:
-      avoidOptionals: true
-      immutableTypes: true
-      skipTypename: true
-      preResolveTypes: true
-  src/generated/graphcms.d.ts:
-    schema: "https://api-us-east-1.graphcms.com/v2/ckdd3q8mef43501xn9rq486qa/master"
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-resolvers"
-    config:
-      immutableTypes: true
-      skipTypename: true
-      preResolveTypes: true
+
+schema: "src/apis/type-defs.ts"
+
+require:
+  - ts-node/register

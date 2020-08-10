@@ -1,13 +1,13 @@
 {
   "dependencies": {
-    "@graphql-tools/load-files": "6.0.15",
-    "@graphql-tools/merge": "6.0.15",
+    "@graphql-tools/load-files": "6.0.17",
+    "@graphql-tools/merge": "6.0.17",
     "@package/utilities": "workspace:*",
     "apollo-server": "2.16.1",
     "ava": "3.11.1",
     "dotenv": "8.2.0",
     "graphql": "15.3.0",
-    "graphql-request": "2.1.0-next.1",
+    "graphql-request": "3.0.0",
     "graphql-tag": "2.11.0",
     "purify-ts": "0.16.0-beta.5"
   },
@@ -17,18 +17,21 @@
     "@graphql-codegen/typescript": "1.17.7",
     "@graphql-codegen/typescript-operations": "1.17.7",
     "@graphql-codegen/typescript-resolvers": "1.17.7",
-    "@types/aws-lambda": "8.10.59",
+    "@types/aws-lambda": "8.10.60",
     "@types/dotenv": "8.2.0",
     "@yarnpkg/pnpify": "2.1.0",
-    "serverless": "1.77.1",
-    "serverless-offline": "6.5.0"
+    "nodemon": "2.0.4",
+    "serverless": "1.78.1",
+    "serverless-offline": "6.5.0",
+    "ts-node": "8.10.2",
+    "typescript": "3.9.7"
   },
   "main": "build/handler.js",
   "name": "@package/data-service",
   "private": true,
   "scripts": {
-    "dev": "tsc -b -w",
+    "dev": "nodemon --watch build --exec yarn run sls:o",
     "generate": "graphql-codegen --config codegen.yml",
-    "start": "nodemon build/handler.js"
+    "sls:o": "pnpify sls offline --printOutput"
   }
 }

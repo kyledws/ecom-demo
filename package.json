@@ -8,9 +8,13 @@
     "eslint-plugin-ava": "10.5.0",
     "eslint-plugin-functional": "3.0.1",
     "eslint-plugin-react": "7.20.5",
-    "nodemon": "2.0.4",
     "prettier": "2.0.5",
     "typescript": "3.9.7"
+  },
+  "dependenciesMeta": {
+    "serverless-offline": {
+      "unplugged": true
+    }
   },
   "name": "caching",
   "private": true,
@@ -25,16 +29,9 @@
     "format": "prettier --write packages/*/src/**/*.{ts,tsx}",
     "host": "yarn workspace @package/storefront run host",
     "pack:storefront": "yarn workspace @package/storefront run pack",
-    "start:data": "yarn workspace @package/data-service run start",
-    "start:page": "yarn workspace @package/page-service run start",
     "test": "ava"
   },
   "workspaces": [
     "packages/*"
-  ],
-  "dependenciesMeta": {
-    "serverless-offline": {
-      "unplugged": true
-    }
-  }
+  ]
 }

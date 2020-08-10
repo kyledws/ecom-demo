@@ -23,7 +23,7 @@ export const Home = (props: HomeProps): React.ReactElement => {
       <body>
         <div id="__storefront" dangerouslySetInnerHTML={{ __html: props.body }}></div>
         <script dangerouslySetInnerHTML={{ __html: stateScript }} />
-        <script src={`${process.env.WEBPACK_BUNDLE_SERVER}/storefront/home.js`}></script>
+        <script src={`${process.env.WEBPACK_BUNDLE_SERVER}/storefront/app.js`}></script>
       </body>
     </html>
   );
