@@ -35,7 +35,7 @@ class MemcacheClient {
         const result = await this.#client?.delete(key);
         return result ?? null;
       },
-      (e) =>
+      (e: unknown) =>
         console.warn(`Failed to delete key "${key}" from "${this.#connectionString}"`, e)
     );
   }
@@ -51,7 +51,7 @@ class MemcacheClient {
         const value = buffer?.value.toString("utf8");
         return value ?? null;
       },
-      (e) =>
+      (e: unknown) =>
         console.warn(`Failed to get key "${key}" from "${this.#connectionString}"`, e)
     );
   }
@@ -70,7 +70,7 @@ class MemcacheClient {
         const result = await this.#client?.set(key, value, {});
         return result ?? null;
       },
-      (e) =>
+      (e: unknown) =>
         console.warn(`Failed to set key "${key}" from "${this.#connectionString}"`, e)
     );
   }

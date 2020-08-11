@@ -59,7 +59,7 @@ export const getContentByFullSlug = <T>(
       };
       return content;
     },
-    (e) => console.warn(`Failed to get story for fullSlug "${fullSlug}"`, e)
+    (e: unknown) => console.warn(`Failed to get story for fullSlug "${fullSlug}"`, e)
   );
 };
 
@@ -79,6 +79,6 @@ export const getContentById = <T>(
       };
       return content;
     },
-    (e) => console.warn(`Failed to get story for id "${id}"`, e)
+    (e: unknown) => console.warn(`Failed to get story for id "${id}"`, e)
   );
 };

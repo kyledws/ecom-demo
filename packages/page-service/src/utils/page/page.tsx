@@ -58,6 +58,6 @@ export function getPage<T>(args: GetPageArgs<T>): Promise<Maybe<string>> {
       );
       return `<!doctyle html>${html}`;
     },
-    (e) => console.log("getPage", e)
+    (e: unknown) => console.log("getPage", e)
   );
 }
