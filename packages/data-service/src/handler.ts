@@ -1,8 +1,10 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { makeExecutableSchema } from "@graphql-tools/schema";
 import { graphql as graphqlServer } from "graphql";
+import { makeExecutableSchema } from "@graphql-tools/schema";
+import StoryblokClient from "storyblok-js-client";
 
-import { ResolverContext, resolvers, typeDefs } from "local/apis";
+import { Memcache, ResolverContext, resolvers, typeDefs } from "local/apis";
+import * as Env from "local/env";
 
 const mergedSchema = makeExecutableSchema({
   inheritResolversFromInterfaces: true,
@@ -10,8 +12,14 @@ const mergedSchema = makeExecutableSchema({
   typeDefs,
 });
 
+const sbClient = new StoryblokClient({
+  accessToken: Env.STORYBLOK_PUBLIC_ACCESS_TOKEN,
+});
+
+const sbCache = Memcache.getMemcacheClient(Env.STORYBLOK_MEMCACHE_CONNECTION_STRING);
+
 export const graphql: APIGatewayProxyHandlerV2 = async (event) => {
-  const resolverContext: ResolverContext = {};
+  const resolverContext: ResolverContext = { bypassCache: false, sbCache, sbClient };
 
   const body = JSON.parse(event.body ?? "");
 

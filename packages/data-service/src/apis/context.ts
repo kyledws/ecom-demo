@@ -1,7 +1,8 @@
-type User = {
-  readonly name: string;
-};
+import StoryblokClient from "storyblok-js-client";
+import { Memcache } from "./caching";
 
 export type ResolverContext = {
-  readonly user?: User;
+  readonly bypassCache: boolean;
+  readonly sbCache: Memcache.Client;
+  readonly sbClient: StoryblokClient;
 };
