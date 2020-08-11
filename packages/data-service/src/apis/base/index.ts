@@ -1,1 +1,2 @@
-export { typeDef } from "./schema";
+export { resolvers } from "./resolvers";
+export { typeDef } from "./type-def";

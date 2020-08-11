@@ -22,6 +22,7 @@ export const typeDef = gql`
 
   interface Page {
     seoMetadata: SeoMetadata
+    type: String!
   }
 
   type SeoMetadata {
@@ -31,12 +32,16 @@ export const typeDef = gql`
 
   type ToursLandingPage implements Page {
     content: [Content!]!
+    seoMetadata: SeoMetadata
+    type: String!
   }
 
   type ToursTourPage implements Page {
     contentSlots: ToursTourPageContentSlots
     contentTours: [Tour!]!
     pricerTours: [Tour!]!
+    seoMetadata: SeoMetadata
+    type: String!
   }
 
   type ToursTourPageContentSlots {

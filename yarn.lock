@@ -861,18 +861,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graphql-codegen/introspection@npm:1.17.7":
-  version: 1.17.7
-  resolution: "@graphql-codegen/introspection@npm:1.17.7"
-  dependencies:
-    "@graphql-codegen/plugin-helpers": 1.17.7
-    tslib: ~2.0.0
-  peerDependencies:
-    graphql: ^0.8.0 || ^0.9.0 || ^0.10.0 || ^0.11.0 || ^0.12.0 || ^0.13.0 || ^14.0.0 || ^15.0.0
-  checksum: 993c2ad9bd77505af191744e8f51fe224b2f25a6f1276e1c44e7ab30278dddadde705d58413453f5fde6b340db4cbd52f0e9a513edb3380b33405964c7b88a2d
-  languageName: node
-  linkType: hard
-
 "@graphql-codegen/plugin-helpers@npm:1.17.7":
   version: 1.17.7
   resolution: "@graphql-codegen/plugin-helpers@npm:1.17.7"
@@ -1078,19 +1066,6 @@ __metadata:
   peerDependencies:
     graphql: ^14.0.0 || ^15.0.0
   checksum: 62dc9f3015bc06e67c04115a8775c8901ed99492134a2a5bef8d1b89763d9996c39b3b94e8440ee9fee8d38d203687539ea9cbf51d2c99281a9851e76f448149
-  languageName: node
-  linkType: hard
-
-"@graphql-tools/load-files@npm:6.0.17":
-  version: 6.0.17
-  resolution: "@graphql-tools/load-files@npm:6.0.17"
-  dependencies:
-    fs-extra: 9.0.1
-    globby: 11.0.1
-    unixify: 1.0.0
-  peerDependencies:
-    graphql: ^14.0.0 || ^15.0.0
-  checksum: 9b5cc4b29c8e3d89050f31fefb5583bb27d09717efacfb8753779a69c53fc6233301b273b0038665f58bd5e0e6409a95c1f0bd5cc8ba91fa3d86581d166bf4ba
   languageName: node
   linkType: hard
 
@@ -1673,12 +1648,10 @@ __metadata:
   resolution: "@package/data-service@workspace:packages/data-service"
   dependencies:
     "@graphql-codegen/cli": 1.17.7
-    "@graphql-codegen/introspection": 1.17.7
     "@graphql-codegen/typescript": 1.17.7
-    "@graphql-codegen/typescript-operations": 1.17.7
     "@graphql-codegen/typescript-resolvers": 1.17.7
-    "@graphql-tools/load-files": 6.0.17
     "@graphql-tools/merge": 6.0.17
+    "@graphql-tools/schema": 6.0.17
     "@package/utilities": "workspace:*"
     "@types/aws-lambda": 8.10.60
     "@types/dotenv": 8.2.0
@@ -1690,6 +1663,7 @@ __metadata:
     graphql: 15.3.0
     graphql-request: 3.0.0
     graphql-tag: 2.11.0
+    local: "link:./build"
     nodemon: 2.0.4
     purify-ts: 0.16.0-beta.5
     serverless: 1.78.1
@@ -9960,6 +9934,12 @@ fsevents@~2.1.2:
   checksum: a1c2e48781e1501e126a32c39bc1fb1a7e2f02bd99e5aeb8853ddaf3c121fffefcc4579367f97ca6890b58369e571af1c9ec82e4e20db238d560ab359ff25c33
   languageName: node
   linkType: hard
+
+"local@link:./build::locator=%40package%2Fdata-service%40workspace%3Apackages%2Fdata-service":
+  version: 0.0.0-use.local
+  resolution: "local@link:./build::locator=%40package%2Fdata-service%40workspace%3Apackages%2Fdata-service"
+  languageName: node
+  linkType: soft
 
 "local@link:./build::locator=%40package%2Fpage-service%40workspace%3Apackages%2Fpage-service":
   version: 0.0.0-use.local

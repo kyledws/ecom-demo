@@ -1,7 +1,7 @@
 {
   "dependencies": {
-    "@graphql-tools/load-files": "6.0.17",
     "@graphql-tools/merge": "6.0.17",
+    "@graphql-tools/schema": "6.0.17",
     "@package/utilities": "workspace:*",
     "apollo-server": "2.16.1",
     "ava": "3.11.1",
@@ -9,13 +9,12 @@
     "graphql": "15.3.0",
     "graphql-request": "3.0.0",
     "graphql-tag": "2.11.0",
+    "local": "link:./build",
     "purify-ts": "0.16.0-beta.5"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "1.17.7",
-    "@graphql-codegen/introspection": "1.17.7",
     "@graphql-codegen/typescript": "1.17.7",
-    "@graphql-codegen/typescript-operations": "1.17.7",
     "@graphql-codegen/typescript-resolvers": "1.17.7",
     "@types/aws-lambda": "8.10.60",
     "@types/dotenv": "8.2.0",
@@ -31,8 +30,9 @@
   "name": "@package/data-service",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch build --exec yarn run sls:o",
+    "dev": "nodemon --exec yarn run sls:o",
     "generate": "graphql-codegen --config codegen.yml",
+    "generate:prettier": "prettier --write src/generated/**/*.{ts,tsx}",
     "sls:o": "pnpify sls offline --printOutput"
   }
 }

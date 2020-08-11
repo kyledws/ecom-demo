@@ -20,6 +20,11 @@ provider:
 plugins:
   - serverless-offline
 
+custom:
+  serverless-offline:
+    httpPort: 2000
+    lambdaPort: 2001
+
 functions:
   hello:
     handler: build/handler.page

@@ -20,10 +20,15 @@ provider:
 plugins:
   - serverless-offline
 
+custom:
+  serverless-offline:
+    httpPort: 1000
+    lambdaPort: 1001
+
 functions:
   hello:
     handler: build/handler.graphql
     events:
       - httpApi:
           path: /graphql
-          method: get
+          method: post

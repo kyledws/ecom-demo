@@ -33,7 +33,7 @@
   "name": "@package/page-service",
   "private": true,
   "scripts": {
-    "dev": "nodemon --watch build --exec yarn run sls:o",
+    "dev": "nodemon --exec yarn run sls:o",
     "sls:o": "pnpify sls offline --printOutput"
   }
 }

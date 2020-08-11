@@ -9,8 +9,9 @@ import { ServerStyleSheet } from "styled-components";
 import { Components as Tours } from "@package/tours";
 import { equals, match, tryMaybeAsync } from "@package/utilities";
 
-import { Serializable } from "local/@types/json";
 import { Home } from "local/layouts/tours";
+import { Serializable } from "local/@types/json";
+import * as Env from "local/env";
 
 type GetPageArgs<T = unknown> = {
   readonly app: string;
@@ -18,8 +19,6 @@ type GetPageArgs<T = unknown> = {
   readonly title: string;
   readonly type: string;
 };
-
-const DATA_SERVICE_ENDPOINT = "http://localhost:4000";
 
 export function getPage<T>(args: GetPageArgs<T>): Promise<Maybe<string>> {
   const { app, context, title, type } = args;
@@ -33,7 +32,7 @@ export function getPage<T>(args: GetPageArgs<T>): Promise<Maybe<string>> {
 
       const client = new ApolloClient({
         cache: new InMemoryCache(),
-        link: new HttpLink({ fetch, uri: DATA_SERVICE_ENDPOINT }),
+        link: new HttpLink({ fetch, uri: Env.DATA_SERVICE }),
         ssrMode: true,
       });
 
