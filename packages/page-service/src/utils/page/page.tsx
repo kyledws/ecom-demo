@@ -6,11 +6,11 @@ import React from "react";
 import ReactSSR from "react-dom/server";
 import { ServerStyleSheet } from "styled-components";
 
-import { Components as Storefront } from "@package/storefront";
+import { Components as Tours } from "@package/tours";
 import { equals, match, tryMaybeAsync } from "@package/utilities";
 
 import { Serializable } from "local/@types/json";
-import { Home } from "local/layouts/storefront";
+import { Home } from "local/layouts/tours";
 
 type GetPageArgs<T = unknown> = {
   readonly app: string;
@@ -25,7 +25,7 @@ export function getPage<T>(args: GetPageArgs<T>): Promise<Maybe<string>> {
   const { app, context, title, type } = args;
   return tryMaybeAsync(
     async () => {
-      const AppMaybe = match(app, [[equals("storefront"), () => Storefront.App]]);
+      const AppMaybe = match(app, [[equals("tours"), () => Tours.App]]);
       if (AppMaybe.isNothing()) {
         return null;
       }

@@ -4,7 +4,7 @@ import { getPage } from "./page";
 
 test("GetPage", async (c: ExecutionContext) => {
   const actual = await getPage({
-    app: "storefront",
+    app: "tours",
     context: {},
     title: "title",
     type: "home",

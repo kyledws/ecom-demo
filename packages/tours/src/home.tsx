@@ -9,7 +9,7 @@ declare const window: Window & {
   __APP_STATE__: any;
 };
 
-const container = document.querySelector("#__storefront");
+const container = document.querySelector("#__tours");
 
 const client = new ApolloClient({
   cache: new InMemoryCache().restore(window.__APP_STATE__.apolloData),

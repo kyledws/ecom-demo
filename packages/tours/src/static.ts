@@ -8,7 +8,7 @@ const HTTP_NOT_FOUND = 404;
 const PORT = 8125;
 
 const server = createServer(async (req, res) => {
-  const request = /\/storefront\/(?<type>\w+)\.js$/.exec(req?.url ?? "");
+  const request = /\/tours\/(?<type>\w+)\.js$/.exec(req?.url ?? "");
   if (request?.groups?.type) {
     const file = await readFile(`./dist/${request.groups.type}.js`, {
       encoding: "utf8",

@@ -23,12 +23,12 @@
     "build:clean": "tsc -b --clean",
     "dev:data": "yarn workspace @package/data-service run dev",
     "dev:page": "yarn workspace @package/page-service run dev",
-    "dev:storefront": "yarn workspace @package/storefront run dev",
+    "dev:tours": "yarn workspace @package/tours run dev",
     "generate": "yarn workspace @package/data-service run generate",
     "lint": "eslint packages/*/src/**/*.{ts,tsx}",
     "format": "prettier --write packages/*/src/**/*.{ts,tsx}",
-    "host": "yarn workspace @package/storefront run host",
-    "pack:storefront": "yarn workspace @package/storefront run pack",
+    "host": "yarn workspace @package/tours run host",
+    "pack:tours": "yarn workspace @package/tours run pack",
     "test": "ava"
   },
   "workspaces": [

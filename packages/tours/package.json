@@ -22,7 +22,7 @@
   },
   "private": true,
   "main": "build/entry.js",
-  "name": "@package/storefront",
+  "name": "@package/tours",
   "scripts": {
     "dev": "tsc -b -w",
     "pack": "webpack-cli",

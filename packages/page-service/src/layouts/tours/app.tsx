@@ -1,6 +1,7 @@
 import React from "react";
 
 import { Serializable } from "local/@types/json";
+import * as Env from "local/env";
 
 type HomeProps = {
   readonly body: string;
@@ -21,9 +22,9 @@ export const Home = (props: HomeProps): React.ReactElement => {
       </head>
 
       <body>
-        <div id="__storefront" dangerouslySetInnerHTML={{ __html: props.body }}></div>
+        <div id="__tours" dangerouslySetInnerHTML={{ __html: props.body }}></div>
         <script dangerouslySetInnerHTML={{ __html: stateScript }} />
-        <script src={`${process.env.WEBPACK_BUNDLE_SERVER}/storefront/app.js`}></script>
+        <script src={`${Env.WEBPACK_BUNDLE_SERVER}/tours/app.js`}></script>
       </body>
     </html>
   );
