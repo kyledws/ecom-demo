@@ -1,8 +1,3 @@
-/* eslint-disable functional/no-return-void */
-/* eslint-disable functional/immutable-data */
-/* eslint-disable functional/no-this-expression */
-/* eslint-disable functional/prefer-readonly-type */
-/* eslint-disable functional/no-class */
 import { Maybe } from "purify-ts";
 import { Client } from "memjs";
 

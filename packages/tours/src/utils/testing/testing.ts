@@ -1,5 +1,3 @@
-/* eslint-disable functional/no-return-void */
-/* eslint-disable functional/immutable-data */
 /* eslint-disable ava/use-test */
 import { JSDOM } from "jsdom";
 import { TestInterface } from "ava";

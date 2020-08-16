@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { App } from "local/components";
 
 declare const window: Window & {
-  // eslint-disable-next-line functional/prefer-readonly-type, @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   __APP_STATE__: any;
 };
 

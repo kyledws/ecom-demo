@@ -1,5 +1,4 @@
-import { ApolloClient, HttpLink, InMemoryCache } from "@apollo/client";
-import fetch from "cross-fetch";
+import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { renderToStringWithData } from "@apollo/client/react/ssr";
 import { Maybe } from "purify-ts";
 import React from "react";
@@ -11,17 +10,17 @@ import { equals, match, tryMaybeAsync } from "@package/utilities";
 
 import { Home } from "local/layouts/tours";
 import { Serializable } from "local/@types/json";
-import * as Env from "local/env";
 
-type GetPageArgs<T = unknown> = {
+type GetPageArgs<Context = unknown> = {
+  apolloClient: ApolloClient<NormalizedCacheObject>;
   app: string;
-  context: T;
+  context: Context;
   title: string;
   type: string;
 };
 
-export function getPage<T>(args: GetPageArgs<T>): Promise<Maybe<string>> {
-  const { app, context, title, type } = args;
+export function getPage<Context>(args: GetPageArgs<Context>): Promise<Maybe<string>> {
+  const { apolloClient, app, context, title, type } = args;
   return tryMaybeAsync(
     async () => {
       const AppMaybe = match(app, [[equals("tours"), () => Tours.App]]);
@@ -30,21 +29,15 @@ export function getPage<T>(args: GetPageArgs<T>): Promise<Maybe<string>> {
       }
       const App = AppMaybe.unsafeCoerce();
 
-      const client = new ApolloClient({
-        cache: new InMemoryCache(),
-        link: new HttpLink({ fetch, uri: Env.DATA_SERVICE }),
-        ssrMode: true,
-      });
-
       const sheet = new ServerStyleSheet();
-      const styledApp = sheet.collectStyles(<App apolloClient={client} />);
+      const styledApp = sheet.collectStyles(<App apolloClient={apolloClient} />);
       const body = await renderToStringWithData(styledApp);
       const styles = sheet.getStyleElement();
       sheet.seal();
 
       const appState = {
         ...context,
-        apolloData: client.extract(),
+        apolloData: apolloClient.extract(),
       } as Serializable;
 
       const LayoutMaybe = match(type, [[equals("home"), () => Home]]);

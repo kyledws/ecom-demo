@@ -1,7 +1,7 @@
 import * as TG from "type-graphql";
 
 import { Excursion } from "./type";
-@TG.Resolver((_of) => Excursion)
+@TG.Resolver(Excursion)
 export class ExcursionResolver {
   @TG.Query((_returns) => Excursion)
   excursion(@TG.Arg("itemMatchCode") code: string): Excursion {

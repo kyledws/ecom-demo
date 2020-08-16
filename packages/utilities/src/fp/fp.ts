@@ -26,14 +26,12 @@ export const self = <T>(s: T): (() => T) => () => s;
 export const tryMaybe = <
   T extends (...args: unknown[]) => R | null,
   R,
-  // eslint-disable-next-line functional/no-return-void
   C extends (e: E) => void,
   E = unknown
 >(
   tryFunction: T,
   catchFunction?: C
 ): Maybe<R> => {
-  // eslint-disable-next-line functional/no-try-statement
   try {
     const result = tryFunction();
     return result === null ? Maybe.empty() : Maybe.of(result);
@@ -46,14 +44,12 @@ export const tryMaybe = <
 export const tryMaybeAsync = async <
   T extends (...args: unknown[]) => Promise<R | null>,
   R,
-  // eslint-disable-next-line functional/no-return-void
   C extends (e: E) => void,
   E = unknown
 >(
   tryFunction: T,
   catchFunction?: C
 ): Promise<Maybe<R>> => {
-  // eslint-disable-next-line functional/no-try-statement
   try {
     const result = await tryFunction();
     return result === null ? Maybe.empty() : Maybe.of(result);

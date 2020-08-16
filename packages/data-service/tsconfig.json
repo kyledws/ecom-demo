@@ -13,6 +13,6 @@
     "target": "esnext"
   },
   "exclude": ["src/**/*.test.ts"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/apis/base"],
+  "include": ["src/**/*.ts", "src/**/*.tsx"],
   "references": [{ "path": "../utilities"}]
 }

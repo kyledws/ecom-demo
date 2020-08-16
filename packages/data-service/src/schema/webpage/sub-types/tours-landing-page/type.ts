@@ -1,7 +1,7 @@
 import * as TG from "type-graphql";
 
 import { SeoMetadata, Webpage, Website } from "../../type";
-import { WebpageContent } from "local/apis/webpage-content";
+import { WebpageContent } from "local/schema/webpage-content";
 
 @TG.ObjectType({ description: "Represents a landing page on the Tours website" })
 export class ToursLandingPage implements Webpage {

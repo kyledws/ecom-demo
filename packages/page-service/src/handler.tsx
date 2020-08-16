@@ -1,5 +1,6 @@
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { request } from "graphql-request";
+import { ApolloClient, HttpLink, InMemoryCache, gql } from "@apollo/client";
+import fetch from "cross-fetch";
 
 import { getPage } from "local/utils/page";
 import * as Env from "local/env";
@@ -7,10 +8,9 @@ import * as Env from "local/env";
 const HTTP_OKAY = 200;
 const HTTP_METHOD_NOT_ALLOWED = 405;
 const HTTP_NOT_FOUND = 404;
-const PORT = 80;
 
-const query = `
-  query ($site: Site, $fullSlug: String) {
+const query = gql`
+  query($site: Site, $fullSlug: String) {
     page(site: $site, fullSlug: $fullSlug) {
       seoMetadata {
         pageTitle
@@ -19,18 +19,26 @@ const query = `
   }
 `;
 
+const apolloClient = new ApolloClient({
+  cache: new InMemoryCache(),
+  link: new HttpLink({ fetch, uri: Env.DATA_SERVICE }),
+  ssrMode: true,
+});
+
 export const page: APIGatewayProxyHandlerV2 = async (event, context, callback) => {
   const url = /\/(?<path>\w*)/.exec(event.rawPath);
-  const variables = { fullSlug: url?.groups?.path };
-  const { page } = await request(Env.DATA_SERVICE, query, {
-    site: "TOURS",
-    fullSlug: "full/slug",
+  const variables = { fullSlug: "full/slug", site: "TOURS" };
+  const result = await apolloClient.query({
+    query,
+    variables,
   });
+  const { page } = result.data;
   if (page) {
     const context = JSON.parse(JSON.stringify(""));
     const body = await getPage({
       ...page,
       app: "tours",
+      apolloClient,
       context,
       title: "Title",
     });

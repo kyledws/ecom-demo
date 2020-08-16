@@ -3,7 +3,7 @@ import * as TG from "type-graphql";
 import { Website } from "../../type";
 import { ToursLandingPage } from "./type";
 
-@TG.Resolver((_of) => ToursLandingPage)
+@TG.Resolver(ToursLandingPage)
 export class ToursLandingPageResolver {
   @TG.Query((_returns) => ToursLandingPage)
   webpage(

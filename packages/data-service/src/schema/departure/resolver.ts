@@ -2,7 +2,7 @@ import * as TG from "type-graphql";
 
 import { Departure } from "./type";
 
-@TG.Resolver((_of) => Departure)
+@TG.Resolver(Departure)
 export class DepartureResolver {
   @TG.Query((_returns) => [Departure])
   departures(

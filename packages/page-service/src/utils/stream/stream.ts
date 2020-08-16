@@ -1,5 +1,3 @@
-/* eslint-disable functional/immutable-data */
-/* eslint-disable functional/prefer-readonly-type */
 import { Stream } from "stream";
 
 export function streamToString(stream: Stream): Promise<string> {
