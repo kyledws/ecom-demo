@@ -11,5 +11,8 @@
   },
   "exclude": ["src/**/*.test.ts"],
   "include": ["src/**/*.ts", "src/**/*.tsx"],
-  "references": [{ "path": "../tours"}]
+  "references": [
+    { "path": "../tours"},
+    { "path": "../utilities"}
+  ]
 }

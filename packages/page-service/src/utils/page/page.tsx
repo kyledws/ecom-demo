@@ -14,10 +14,10 @@ import { Serializable } from "local/@types/json";
 import * as Env from "local/env";
 
 type GetPageArgs<T = unknown> = {
-  readonly app: string;
-  readonly context: T;
-  readonly title: string;
-  readonly type: string;
+  app: string;
+  context: T;
+  title: string;
+  type: string;
 };
 
 export function getPage<T>(args: GetPageArgs<T>): Promise<Maybe<string>> {

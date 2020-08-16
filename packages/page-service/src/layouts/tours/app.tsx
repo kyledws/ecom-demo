@@ -4,10 +4,10 @@ import { Serializable } from "local/@types/json";
 import * as Env from "local/env";
 
 type HomeProps = {
-  readonly body: string;
-  readonly state: Serializable;
-  readonly styles: readonly React.ReactElement[];
-  readonly title: string;
+  body: string;
+  state: Serializable;
+  styles: React.ReactElement[];
+  title: string;
 };
 
 export const Home = (props: HomeProps): React.ReactElement => {

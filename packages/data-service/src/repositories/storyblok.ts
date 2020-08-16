@@ -3,12 +3,12 @@ import StoryblokClient from "storyblok-js-client";
 
 import { tryMaybeAsync } from "@package/utilities";
 
-import { Content as GqlContent } from "local/generated/schema";
+import { WebpageContent as GqlContent } from "local/apis/webpage-content";
 import { Memcache } from "local/apis";
 import * as Cached from "./storyblok-cache";
 
 export type SbContent<T = unknown> = Omit<GqlContent, "body"> & {
-  readonly body: T;
+  body: T;
 };
 
 export const getCachedContentByFullSlug = async <T>(

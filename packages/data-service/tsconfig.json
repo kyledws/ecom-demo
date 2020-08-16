@@ -3,12 +3,16 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "composite": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
     "outDir": "./build",
     "paths": {
       "local/*": ["./*"],
     },
     "rootDir": "./src",
+    "target": "esnext"
   },
   "exclude": ["src/**/*.test.ts"],
-  "include": ["src/**/*.ts", "src/**/*.tsx", "src/apis/base"]
+  "include": ["src/**/*.ts", "src/**/*.tsx", "src/apis/base"],
+  "references": [{ "path": "../utilities"}]
 }

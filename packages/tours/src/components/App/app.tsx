@@ -4,7 +4,7 @@ import React from "react";
 import { HelloWorld } from "local/components";
 
 type AppProps = {
-  readonly apolloClient: ApolloClient<unknown>;
+  apolloClient: ApolloClient<unknown>;
 };
 
 export const App = (props: AppProps): React.ReactElement => {

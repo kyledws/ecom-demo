@@ -1,0 +1,1 @@
+export { ToursTourPage } from "./type";

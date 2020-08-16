@@ -3,11 +3,11 @@ import { Maybe } from "purify-ts";
 export const equals = <T>(first: T): ((second: T) => boolean) => (second: T): boolean =>
   first === second;
 
-type Matcher<V, R> = readonly [(needle: V) => boolean, () => R];
+type Matcher<V, R> = [(needle: V) => boolean, () => R];
 
 const MATCHER_INDEX = 1;
 
-export const match = <V, R>(needle: V, matchers: readonly Matcher<V, R>[]): Maybe<R> => {
+export const match = <V, R>(needle: V, matchers: Matcher<V, R>[]): Maybe<R> => {
   const matcher = matchers.find(([matcher]) => matcher(needle));
   if (matcher) {
     return Maybe.of(matcher[MATCHER_INDEX]());
@@ -24,7 +24,7 @@ export const match = <V, R>(needle: V, matchers: readonly Matcher<V, R>[]): Mayb
 export const self = <T>(s: T): (() => T) => () => s;
 
 export const tryMaybe = <
-  T extends (...args: readonly unknown[]) => R | null,
+  T extends (...args: unknown[]) => R | null,
   R,
   // eslint-disable-next-line functional/no-return-void
   C extends (e: E) => void,
@@ -44,7 +44,7 @@ export const tryMaybe = <
 };
 
 export const tryMaybeAsync = async <
-  T extends (...args: readonly unknown[]) => Promise<R | null>,
+  T extends (...args: unknown[]) => Promise<R | null>,
   R,
   // eslint-disable-next-line functional/no-return-void
   C extends (e: E) => void,

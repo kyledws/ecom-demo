@@ -6,7 +6,6 @@
     "eslint": "7.6.0",
     "eslint-config-prettier": "6.11.0",
     "eslint-plugin-ava": "10.5.0",
-    "eslint-plugin-functional": "3.0.1",
     "eslint-plugin-react": "7.20.5",
     "prettier": "2.0.5",
     "typescript": "3.9.7"
@@ -24,7 +23,6 @@
     "dev:data": "yarn workspace @package/data-service run dev",
     "dev:page": "yarn workspace @package/page-service run dev",
     "dev:tours": "yarn workspace @package/tours run dev",
-    "generate": "yarn workspace @package/data-service run generate",
     "lint": "eslint packages/*/src/**/*.{ts,tsx}",
     "format": "prettier --write packages/*/src/**/*.{ts,tsx}",
     "host": "yarn workspace @package/tours run host",

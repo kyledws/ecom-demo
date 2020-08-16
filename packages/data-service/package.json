@@ -1,10 +1,9 @@
 {
   "dependencies": {
-    "@graphql-tools/merge": "6.0.17",
-    "@graphql-tools/schema": "6.0.17",
     "@package/utilities": "workspace:*",
     "apollo-server": "2.16.1",
     "ava": "3.11.1",
+    "class-validator": "0.12.2",
     "dotenv": "8.2.0",
     "graphql": "15.3.0",
     "graphql-request": "3.0.0",
@@ -12,12 +11,11 @@
     "local": "link:./build",
     "memjs": "1.2.2",
     "purify-ts": "0.16.0-beta.5",
-    "storyblok-js-client": "2.5.2"
+    "reflect-metadata": "0.1.13",
+    "storyblok-js-client": "2.5.2",
+    "type-graphql": "1.0.0-rc.3"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "1.17.7",
-    "@graphql-codegen/typescript": "1.17.7",
-    "@graphql-codegen/typescript-resolvers": "1.17.7",
     "@types/aws-lambda": "8.10.60",
     "@types/dotenv": "8.2.0",
     "@types/memjs": "1.2.1",
@@ -34,8 +32,6 @@
   "private": true,
   "scripts": {
     "dev": "nodemon --exec yarn run sls:o",
-    "generate": "graphql-codegen --config codegen.yml",
-    "generate:prettier": "prettier --write src/generated/**/*.{ts,tsx}",
     "sls:o": "pnpify sls offline --printOutput"
   }
 }
