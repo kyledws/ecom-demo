@@ -28,10 +28,7 @@ const apolloClient = new ApolloClient({
 export const page: APIGatewayProxyHandlerV2 = async (event, context, callback) => {
   const url = /\/(?<path>\w*)/.exec(event.rawPath);
   const variables = { fullSlug: "full/slug", site: "TOURS" };
-  const result = await apolloClient.query({
-    query,
-    variables,
-  });
+  const result = await apolloClient.query({ query, variables });
   const { page } = result.data;
   if (page) {
     const context = JSON.parse(JSON.stringify(""));

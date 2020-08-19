@@ -1,10 +1,11 @@
 import "reflect-metadata";
 
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { graphql as graphqlServer, printSchema } from "graphql";
+import { graphql as graphqlServer } from "graphql";
 import StoryblokClient from "storyblok-js-client";
 
-import { Memcache, ResolverContext, schema } from "local/schema";
+import { Memcache } from "./repository";
+import { ResolverContext, schema } from "local/schema";
 import * as Env from "local/env";
 
 const sbClient = new StoryblokClient({

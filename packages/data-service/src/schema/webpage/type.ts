@@ -7,8 +7,8 @@ export enum Website {
 }
 
 TG.registerEnumType(Website, {
+  description: "Identifier for one of the websites",
   name: "Website",
-  description: "Identify for one of the websites",
 });
 
 @TG.ObjectType()
@@ -22,17 +22,11 @@ export class SeoMetadata {
 
 @TG.InterfaceType({ description: "Represents a page of a website" })
 export abstract class Webpage {
-  @TG.Field({ nullable: true })
-  description?: string;
-
   @TG.Field((_type) => SeoMetadata, { nullable: true })
   seoMetadata?: SeoMetadata;
 
   @TG.Field((_type) => Website)
   site!: Website;
-
-  @TG.Field({ nullable: true })
-  title?: string;
 
   @TG.Field()
   type!: string;

@@ -8,6 +8,7 @@ import { ToursLandingPageResolver } from "./webpage";
 import { WebpageContentResolver } from "./webpage-content";
 
 export const schema = buildSchema({
+  dateScalarMode: "timestamp",
   resolvers: [
     DepartureResolver,
     ExcursionResolver,

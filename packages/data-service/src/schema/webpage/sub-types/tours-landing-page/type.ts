@@ -3,8 +3,16 @@ import * as TG from "type-graphql";
 import { SeoMetadata, Webpage, Website } from "../../type";
 import { WebpageContent } from "local/schema/webpage-content";
 
-@TG.ObjectType({ description: "Represents a landing page on the Tours website" })
+@TG.ObjectType({
+  description: "Represents a landing page on the Tours website",
+  implements: Webpage,
+})
 export class ToursLandingPage implements Webpage {
+  constructor(args: ConstructorArgs<ToursLandingPage>) {
+    this.content = args.content;
+    this.seoMetadata = args.seoMetadata;
+  }
+
   @TG.Field((_type) => [WebpageContent])
   content!: WebpageContent[];
 
@@ -17,12 +25,7 @@ export class ToursLandingPage implements Webpage {
   }
 
   @TG.Field()
-  type!: string;
-
-  constructor() {
-    this.type = "LandingPage";
-    this.seoMetadata = new SeoMetadata();
-    this.seoMetadata.description = "Description";
-    this.seoMetadata.title = "Title";
+  get type(): string {
+    return "LandingPage";
   }
 }

@@ -4,7 +4,10 @@ import { SeoMetadata, Webpage, Website } from "../../type";
 import { Tour } from "local/schema/tour";
 import { WebpageContent } from "local/schema/webpage-content";
 
-@TG.ObjectType({ description: "Represents a tour page on the Tours website" })
+@TG.ObjectType({
+  description: "Represents a tour page on the Tours website",
+  implements: Webpage,
+})
 export class ToursTourPage implements Webpage {
   @TG.Field((_type) => ToursTourPageContentSlots, { nullable: true })
   contentSlots?: ToursTourPageContentSlots;
@@ -19,12 +22,10 @@ export class ToursTourPage implements Webpage {
   seoMetadata?: SeoMetadata;
 
   @TG.Field((_type) => Website)
-  get site(): Website {
-    return Website.TOURS;
-  }
+  site: Website = Website.TOURS;
 
   @TG.Field()
-  type!: string;
+  type: string = "TourPage";
 }
 
 @TG.ObjectType()

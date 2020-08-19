@@ -2,15 +2,22 @@ import * as TG from "type-graphql";
 
 @TG.ObjectType({ description: "Represents a piece of content on the page" })
 export class WebpageContent {
-  @TG.Field()
-  body!: string;
+  constructor(args: ConstructorArgs<WebpageContent>) {
+    this.body = args.body;
+    this.fullSlug = args.fullSlug;
+    this.id = args.id;
+    this.type = args.type;
+  }
 
   @TG.Field()
-  fullSlug!: string;
+  body: string;
+
+  @TG.Field()
+  fullSlug: string;
 
   @TG.Field((_type) => TG.Int)
-  id!: number;
+  id: number;
 
   @TG.Field()
-  type!: string;
+  type: string;
 }

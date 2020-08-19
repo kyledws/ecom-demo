@@ -2,8 +2,8 @@ import { Maybe } from "purify-ts";
 
 import { tryMaybeAsync } from "@package/utilities";
 
-import { Memcache } from "local/schema";
 import { SbContent } from "./storyblok";
+import * as Memcache from "./memcache";
 
 export const cacheContentByFullSlug = async <T>(
   fullSlug: string,

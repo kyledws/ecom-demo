@@ -1,5 +1,5 @@
 import StoryblokClient from "storyblok-js-client";
-import { Memcache } from "./caching";
+import { Memcache } from "../repository";
 
 export type ResolverContext = {
   bypassCache: boolean;

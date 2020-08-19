@@ -4,12 +4,12 @@ import { Client } from "memjs";
 import { tryMaybeAsync } from "@package/utilities";
 
 class MemcacheClient {
-  #connectionString: string;
   #client: Client | null;
+  #connectionString: string;
 
   constructor(uri: string) {
-    this.#connectionString = uri;
     this.#client = null;
+    this.#connectionString = uri;
   }
 
   close(): void {
@@ -66,7 +66,7 @@ class MemcacheClient {
         return result ?? null;
       },
       (e: unknown) =>
-        console.warn(`Failed to set key "${key}" from "${this.#connectionString}"`, e)
+        console.warn(`Failed to set key "${key}" in "${this.#connectionString}"`, e)
     );
   }
 }

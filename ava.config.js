@@ -1,3 +1,3 @@
 export default {
-  files: ["packages/*/build/**/*.test.js"],
+  files: ["packages/data-service/build/**/*.test.js"],
 };

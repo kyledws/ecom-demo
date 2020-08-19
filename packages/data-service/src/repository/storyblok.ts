@@ -4,8 +4,8 @@ import StoryblokClient from "storyblok-js-client";
 import { tryMaybeAsync } from "@package/utilities";
 
 import { WebpageContent as GqlContent } from "local/schema/webpage-content";
-import { Memcache } from "local/schema";
 import * as Cached from "./storyblok-cache";
+import * as Memcache from "./memcache";
 
 export type SbContent<T = unknown> = Omit<GqlContent, "body"> & {
   body: T;
