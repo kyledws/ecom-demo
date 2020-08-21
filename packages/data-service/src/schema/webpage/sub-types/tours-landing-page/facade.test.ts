@@ -3,12 +3,13 @@ import "reflect-metadata";
 import test, { ExecutionContext } from "ava";
 
 import { SbContent } from "local/repository";
+import { WebpageContent } from "local/schema/webpage-content";
 import { Website } from "../../type";
 import * as Facade from "./facade";
 
 test("Facade.sbContentToWebpageContent", async (c: ExecutionContext) => {
   const sbContent: SbContent = {
-    body: [],
+    body: { _uid: "mockUid", component: "mockComponent" },
     fullSlug: "fullSlug",
     id: 10,
     type: "type",
@@ -16,7 +17,7 @@ test("Facade.sbContentToWebpageContent", async (c: ExecutionContext) => {
 
   const actual = Facade.sbContentToWebpageContent(sbContent);
   c.like(actual, {
-    body: "[]",
+    body: '{"_uid":"mockUid","component":"mockComponent"}',
     fullSlug: "fullSlug",
     id: 10,
     type: "type",
@@ -24,8 +25,8 @@ test("Facade.sbContentToWebpageContent", async (c: ExecutionContext) => {
 });
 
 test("Facade.webpageContentToToursLandingPage", async (c: ExecutionContext) => {
-  const content = {
-    body: "[]",
+  const content: WebpageContent = {
+    body: '{"_uid":"mockUid","component":"mockComponent"}',
     fullSlug: "fullSlug",
     id: 10,
     type: "type",
@@ -34,7 +35,7 @@ test("Facade.webpageContentToToursLandingPage", async (c: ExecutionContext) => {
   c.like(actual, {
     content: [
       {
-        body: "[]",
+        body: '{"_uid":"mockUid","component":"mockComponent"}',
         fullSlug: "fullSlug",
         id: 10,
         type: "type",
