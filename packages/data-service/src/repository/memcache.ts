@@ -1,15 +1,19 @@
 import { Maybe } from "purify-ts";
-import { Client } from "memjs";
+import { Client as MemJsClient } from "memjs";
 
 import { tryMaybeAsync } from "@package/utilities";
 
-class MemcacheClient {
-  #client: Client | null;
-  #connectionString: string;
+type ClientCreator = (url: string) => MemJsClient;
 
-  constructor(uri: string) {
+class Client {
+  #client: MemJsClient | null;
+  #connectionString: string;
+  #creator: ClientCreator;
+
+  constructor(uri: string, creator: ClientCreator) {
     this.#client = null;
     this.#connectionString = uri;
+    this.#creator = creator;
   }
 
   close(): void {
@@ -17,7 +21,7 @@ class MemcacheClient {
   }
 
   connect(): void {
-    this.#client = Client.create(this.#connectionString);
+    this.#client = this.#creator(this.#connectionString);
   }
 
   async delete(key: string): Promise<Maybe<boolean>> {
@@ -71,8 +75,8 @@ class MemcacheClient {
   }
 }
 
-export { MemcacheClient as Client };
+export type { Client };
 
-export const getMemcacheClient = (str: string): MemcacheClient => {
-  return new MemcacheClient(str);
+export const getClient = (str: string, creator: ClientCreator): Client => {
+  return new Client(str, creator);
 };

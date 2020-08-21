@@ -49,6 +49,7 @@ export const getContentById = async <T>(
   );
 };
 
-const getKeyForFullSlug = (fullSlug: string): string => `storyblok_full_slug_${fullSlug}`;
+export const getKeyForFullSlug = (fullSlug: string): string =>
+  `storyblok_full_slug_${fullSlug}`;
 
-const getKeyForId = (id: number): string => `storyblok_id_${id}`;
+export const getKeyForId = (id: number): string => `storyblok_id_${id}`;

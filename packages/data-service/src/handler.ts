@@ -12,7 +12,7 @@ const sbClient = new StoryblokClient({
   accessToken: Env.STORYBLOK_PUBLIC_ACCESS_TOKEN,
 });
 
-const sbCache = Memcache.getMemcacheClient(Env.STORYBLOK_MEMCACHE_CONNECTION_STRING);
+const sbCache = Memcache.getClient(Env.STORYBLOK_MEMCACHE_CONNECTION_STRING);
 
 export const graphql: APIGatewayProxyHandlerV2 = async (event) => {
   const resolverContext: ResolverContext = { bypassCache: false, sbCache, sbClient };

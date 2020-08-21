@@ -2,13 +2,13 @@ import "reflect-metadata";
 
 import test, { ExecutionContext } from "ava";
 
-import { SbContent } from "local/repository";
+import { Storyblok } from "local/repository";
 import { WebpageContent } from "local/schema/webpage-content";
 import { Website } from "../../type";
 import * as Facade from "./facade";
 
 test("Facade.sbContentToWebpageContent", async (c: ExecutionContext) => {
-  const sbContent: SbContent = {
+  const sbContent: Storyblok.SbContent = {
     body: { _uid: "mockUid", component: "mockComponent" },
     fullSlug: "fullSlug",
     id: 10,

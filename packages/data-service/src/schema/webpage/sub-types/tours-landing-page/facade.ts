@@ -1,7 +1,7 @@
 import { Maybe } from "purify-ts";
 import StoryblokClient from "storyblok-js-client";
 
-import { Memcache, SbContent, Storyblok } from "local/repository";
+import { Memcache, Storyblok } from "local/repository";
 import { ToursLandingPage } from "./type";
 import { Website } from "../../type";
 import { WebpageContent } from "local/schema/webpage-content";
@@ -23,7 +23,7 @@ export const getToursLandingPage = async (
     .map(webpageContentToToursLandingPage);
 };
 
-export const sbContentToWebpageContent = (sb: SbContent): WebpageContent => {
+export const sbContentToWebpageContent = (sb: Storyblok.SbContent): WebpageContent => {
   return new WebpageContent({
     body: JSON.stringify(sb.body),
     fullSlug: sb.fullSlug,
