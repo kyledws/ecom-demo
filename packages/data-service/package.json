@@ -12,20 +12,20 @@
     "purify-ts": "0.16.0-beta.5",
     "reflect-metadata": "0.1.13",
     "storyblok-js-client": "2.5.2",
-    "type-graphql": "1.0.0-rc.3"
+    "type-graphql": "1.0.0"
   },
   "devDependencies": {
     "@types/aws-lambda": "8.10.61",
     "@types/dotenv": "8.2.0",
     "@types/memjs": "1.2.1",
-    "@types/node": "14.0.27",
+    "@types/node": "14.6.0",
     "@yarnpkg/pnpify": "2.1.0",
     "ava": "3.11.1",
     "nodemon": "2.0.4",
-    "serverless": "1.78.1",
+    "serverless": "1.79.0",
     "serverless-offline": "6.5.0",
-    "ts-node": "8.10.2",
-    "typescript": "3.9.7"
+    "ts-node": "9.0.0",
+    "typescript": "4.0.2"
   },
   "main": "build/handler.js",
   "name": "@package/data-service",

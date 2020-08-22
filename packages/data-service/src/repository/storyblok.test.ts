@@ -3,9 +3,13 @@ import test, { ExecutionContext } from "ava";
 
 import { getContentFromStory, SbContent } from "./storyblok";
 
-type StoryContent = StoryblokComponent<string> & {
+type SbData = StoryblokComponent<"mockComponent"> & SbSchema;
+
+type SbSchema = {
   mockProperty: "mockData";
 };
+
+type Content = SbContent<"mockComponent", SbSchema>;
 
 test("getContentFromStory", async (c: ExecutionContext) => {
   const mockStory: Story = {
@@ -20,11 +24,11 @@ test("getContentFromStory", async (c: ExecutionContext) => {
         },
         full_slug: "mockFullSlug",
         id: 1234,
-      } as StoryData<StoryContent>,
+      } as StoryData<SbData>,
     },
   } as Story;
 
-  const expected: SbContent<StoryContent> = {
+  const expected: Content = {
     body: {
       _editable: "mockEditiable",
       _uid: "mockUid",

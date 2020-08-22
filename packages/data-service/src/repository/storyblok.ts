@@ -1,78 +1,53 @@
-import { Maybe } from "purify-ts";
 import StoryblokClient, { Story, StoryblokComponent } from "storyblok-js-client";
 
-import { tryMaybeAsync } from "@package/utilities";
+import { Either, tryEitherAsync } from "@package/utilities";
 
+import { trace } from "local/utils/debug";
 import { WebpageContent as GqlContent } from "local/schema/webpage-content";
-import * as Cached from "./storyblok-cache";
-import * as Memcache from "./memcache";
 
-export type SbContent<T = unknown> = Omit<GqlContent, "body"> & {
-  body: StoryblokComponent<any> & T;
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type SbContent<C extends string = any, T = unknown> = Omit<GqlContent, "body"> & {
+  body: StoryblokComponent<C> & T;
 };
 
-export const getCachedContentByFullSlug = async <T>(
-  fullSlug: string,
-  client: StoryblokClient,
-  cache: Memcache.Client,
-  bypassCache?: boolean
-): Promise<Maybe<SbContent<T>>> => {
-  const cached = bypassCache
-    ? null
-    : await Cached.getContentByFullSlug<T>(fullSlug, cache);
-  const content = cached?.isJust()
-    ? cached
-    : await getContentByFullSlug<T>(fullSlug, client);
-  if (!bypassCache && (!cache || cached?.isNothing()) && content.isJust()) {
-    await Cached.cacheContentByFullSlug(fullSlug, content.extract(), cache);
-  }
-  return content;
-};
-
-export const getCachedContentById = async <T>(
-  id: number,
-  client: StoryblokClient,
-  cache: Memcache.Client,
-  bypassCache?: boolean
-): Promise<Maybe<SbContent<T>>> => {
-  const cached = bypassCache ? null : await Cached.getContentById<T>(id, cache);
-  const content = cached?.isJust() ? cached : await getContentById<T>(id, client);
-  if (!bypassCache && (!cache || cached?.isNothing()) && content.isJust()) {
-    await Cached.cacheContentById(id, content.extract(), cache);
-  }
-  return content;
-};
-
-export const getContentByFullSlug = <T>(
+export const getContentByFullSlug = (
   fullSlug: string,
   client: StoryblokClient
-): Promise<Maybe<SbContent<T>>> => {
-  return tryMaybeAsync(
+): Promise<Either<SbContent>> => {
+  return tryEitherAsync(
     async () => {
       const response = await client.getStory(fullSlug);
       return getContentFromStory(response);
     },
-    (e: unknown) => console.warn(`Failed to get story for fullSlug "${fullSlug}"`, e)
+    (e: unknown) =>
+      trace({
+        innerError: e,
+        message: `Failed to get story for fullSlug "${fullSlug}"`,
+      })
   );
 };
 
-export const getContentById = <T>(
+export const getContentById = (
   id: number,
   client: StoryblokClient
-): Promise<Maybe<SbContent<T>>> => {
-  return tryMaybeAsync(
+): Promise<Either<SbContent>> => {
+  return tryEitherAsync(
     async () => {
       const response = await client.getStory(id.toString());
       return getContentFromStory(response);
     },
-    (e: unknown) => console.warn(`Failed to get story for id "${id}"`, e)
+    (e: unknown) =>
+      trace({
+        innerError: e,
+        message: `Failed to get story for id "${id}"`,
+      })
   );
 };
 
-export const getContentFromStory = <T>(story: Story): SbContent<T> => {
+export const getContentFromStory = (story: Story): SbContent => {
   const data = story.data.story;
   const content = {
-    body: (data.content as unknown) as StoryblokComponent<any> & T,
+    body: data.content,
     fullSlug: data.full_slug,
     id: data.id,
     type: data.content.component,

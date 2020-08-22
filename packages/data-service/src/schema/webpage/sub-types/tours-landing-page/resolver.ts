@@ -26,6 +26,8 @@ export class ToursLandingPageResolver {
         ...args,
         ...context,
       })
-    ).extractNullable();
+    )
+      .toMaybe()
+      .extractNullable();
   }
 }

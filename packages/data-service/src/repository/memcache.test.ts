@@ -9,9 +9,13 @@ test("MemcacheClient delete: no key", async (c: ExecutionContext) => {
   const mockMemJsClient = Mock.getMockMemJsClient(repo);
   const client = Test.getClient("", mockMemJsClient.create as any);
 
-  const maybe = await client.delete("key");
+  const either = await client.delete("key");
 
-  c.is(maybe.isNothing(), true);
+  c.is(either.isLeft(), true);
+  c.deepEqual(either.extract(), {
+    innerError: "Key does not exist, cannot delete",
+    message: 'Failed to delete key "key" from ""',
+  });
 });
 
 test("MemcacheClient delete: key exists", async (c: ExecutionContext) => {
@@ -22,10 +26,10 @@ test("MemcacheClient delete: key exists", async (c: ExecutionContext) => {
 
   c.is(repo.key, "mockDelete");
 
-  const maybe = await client.delete("key");
+  const either = await client.delete("key");
 
-  c.is(maybe.isJust(), true);
-  c.is(maybe.unsafeCoerce(), true);
+  c.is(either.isRight(), true);
+  c.is(either.extract(), true);
   c.is(repo.key, undefined);
 });
 
@@ -35,9 +39,13 @@ test("MemcacheClient get: no key", async (c: ExecutionContext) => {
   const mockMemJsClient = Mock.getMockMemJsClient(repo);
   const client = Test.getClient("", mockMemJsClient.create as any);
 
-  const maybe = await client.get("key");
+  const either = await client.get("key");
 
-  c.is(maybe.isNothing(), true);
+  c.is(either.isLeft(), true);
+  c.deepEqual(either.extract(), {
+    innerError: "Key does not exist, cannot get",
+    message: 'Failed to get key "key" from ""',
+  });
 });
 
 test("MemcacheClient get: key exists", async (c: ExecutionContext) => {
@@ -48,8 +56,8 @@ test("MemcacheClient get: key exists", async (c: ExecutionContext) => {
 
   const maybe = await client.get("key");
 
-  c.is(maybe.isJust(), true);
-  c.is(maybe.unsafeCoerce(), "mockGet");
+  c.is(maybe.isRight(), true);
+  c.is(maybe.extract(), "mockGet");
 });
 
 test("MemcacheClient set: no key", async (c: ExecutionContext) => {
@@ -62,8 +70,8 @@ test("MemcacheClient set: no key", async (c: ExecutionContext) => {
 
   const maybe = await client.set("key", "mockSet");
 
-  c.is(maybe.isJust(), true);
-  c.is(maybe.unsafeCoerce(), true);
+  c.is(maybe.isRight(), true);
+  c.is(maybe.extract(), true);
   c.is(repo["key"], "mockSet");
 });
 
@@ -77,7 +85,7 @@ test("MemcacheClient set: key exists", async (c: ExecutionContext) => {
 
   const maybe = await client.set("key", "mockSet2");
 
-  c.is(maybe.isJust(), true);
-  c.is(maybe.unsafeCoerce(), true);
+  c.is(maybe.isRight(), true);
+  c.is(maybe.extract(), true);
   c.is(repo.key, "mockSet2");
 });

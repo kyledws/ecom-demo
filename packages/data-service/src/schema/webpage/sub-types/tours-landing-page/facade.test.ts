@@ -5,9 +5,9 @@ import test, { ExecutionContext } from "ava";
 import { Storyblok } from "local/repository";
 import { WebpageContent } from "local/schema/webpage-content";
 import { Website } from "../../type";
-import * as Facade from "./facade";
+import * as Test from "./facade";
 
-test("Facade.sbContentToWebpageContent", async (c: ExecutionContext) => {
+test("sbContentToWebpageContent", async (c: ExecutionContext) => {
   const sbContent: Storyblok.SbContent = {
     body: { _uid: "mockUid", component: "mockComponent" },
     fullSlug: "fullSlug",
@@ -15,7 +15,7 @@ test("Facade.sbContentToWebpageContent", async (c: ExecutionContext) => {
     type: "type",
   };
 
-  const actual = Facade.sbContentToWebpageContent(sbContent);
+  const actual = Test.sbContentToWebpageContent(sbContent);
   c.like(actual, {
     body: '{"_uid":"mockUid","component":"mockComponent"}',
     fullSlug: "fullSlug",
@@ -24,14 +24,14 @@ test("Facade.sbContentToWebpageContent", async (c: ExecutionContext) => {
   });
 });
 
-test("Facade.webpageContentToToursLandingPage", async (c: ExecutionContext) => {
+test("webpageContentToToursLandingPage", async (c: ExecutionContext) => {
   const content: WebpageContent = {
     body: '{"_uid":"mockUid","component":"mockComponent"}',
     fullSlug: "fullSlug",
     id: 10,
     type: "type",
   };
-  const actual = Facade.webpageContentToToursLandingPage(content);
+  const actual = Test.webpageContentToToursLandingPage(content);
   c.like(actual, {
     content: [
       {

@@ -1,4 +1,4 @@
-import { Maybe } from "purify-ts";
+import { Either, Left, Maybe, Right } from "purify-ts";
 
 export const equals = <T>(first: T): ((second: T) => boolean) => (second: T): boolean =>
   first === second;
@@ -22,6 +22,51 @@ export const match = <V, R>(needle: V, matchers: Matcher<V, R>[]): Maybe<R> => {
 };
 
 export const self = <T>(s: T): (() => T) => () => s;
+
+export type EitherError<T = unknown> = {
+  innerError?: T;
+  message: string;
+};
+
+type EitherType<R, L = unknown> = Either<EitherError<L>, R>;
+
+export { EitherType as Either };
+
+export const tryEither = <
+  T extends (...args: unknown[]) => R | null,
+  R,
+  C extends (e: E) => EitherError<L>,
+  E = unknown,
+  L = unknown
+>(
+  tryFunction: T,
+  catchFunction: C
+): Either<EitherError<L>, R> => {
+  try {
+    const result = tryFunction();
+    return result === null ? Left({ message: "Null result" }) : Right(result);
+  } catch (e) {
+    return Left(catchFunction.call(null, e));
+  }
+};
+
+export const tryEitherAsync = async <
+  T extends (...args: unknown[]) => Promise<R | null>,
+  R,
+  C extends (e: E) => EitherError<L>,
+  E = unknown,
+  L = unknown
+>(
+  tryFunction: T,
+  catchFunction: C
+): Promise<Either<EitherError<L>, R>> => {
+  try {
+    const result = await tryFunction();
+    return result === null ? Left({ message: "Null result" }) : Right(result);
+  } catch (e) {
+    return Left(catchFunction.call(null, e));
+  }
+};
 
 export const tryMaybe = <
   T extends (...args: unknown[]) => R | null,

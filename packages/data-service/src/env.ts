@@ -2,6 +2,8 @@ import { config } from "dotenv";
 
 config();
 
+export const DEBUG_TRACING = process.env.DEBUG_TRACING === "true";
+
 export const STORYBLOK_MEMCACHE_CONNECTION_STRING =
   process.env.STORYBLOK_MEMCACHE_CONNECTION_STRING ?? "";
 

@@ -1,5 +1,6 @@
-import { Maybe } from "purify-ts";
 import StoryblokClient from "storyblok-js-client";
+
+import { Either } from "@package/utilities";
 
 import { Memcache, Storyblok } from "local/repository";
 import { ToursLandingPage } from "./type";
@@ -15,10 +16,9 @@ type GetToursLandingPage = {
 
 export const getToursLandingPage = async (
   args: GetToursLandingPage
-): Promise<Maybe<ToursLandingPage>> => {
-  return (
-    await Storyblok.getContentByFullSlug(args.fullSlug, args.sbClient, args.sbCache)
-  )
+): Promise<Either<ToursLandingPage>> => {
+  return (await Storyblok.cache.getContentByFullSlug(args.fullSlug, args.sbCache))
+    .alt(await Storyblok.getContentByFullSlug(args.fullSlug, args.sbClient))
     .map(sbContentToWebpageContent)
     .map(webpageContentToToursLandingPage);
 };
@@ -32,6 +32,8 @@ export const sbContentToWebpageContent = (sb: Storyblok.SbContent): WebpageConte
   });
 };
 
-export const webpageContentToToursLandingPage = (content: WebpageContent) => {
+export const webpageContentToToursLandingPage = (
+  content: WebpageContent
+): ToursLandingPage => {
   return new ToursLandingPage({ content: [content] });
 };

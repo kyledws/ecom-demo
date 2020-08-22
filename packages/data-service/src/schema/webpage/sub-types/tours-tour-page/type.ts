@@ -25,7 +25,7 @@ export class ToursTourPage implements Webpage {
   site: Website = Website.TOURS;
 
   @TG.Field()
-  type: string = "TourPage";
+  type = "TourPage";
 }
 
 @TG.ObjectType()

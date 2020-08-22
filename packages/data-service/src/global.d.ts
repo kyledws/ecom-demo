@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 declare global {
   type ConstructorArgs<T> = NonFunctionProperties<Pick<T, WritableKeys<T>>>;
 
@@ -8,6 +9,7 @@ declare global {
     : B;
 
   type NonFunctionPropertyNames<T> = {
+    // eslint-disable-next-line @typescript-eslint/ban-types
     [K in keyof T]: T[K] extends Function ? never : K;
   }[keyof T];
   type NonFunctionProperties<T> = Pick<T, NonFunctionPropertyNames<T>>;

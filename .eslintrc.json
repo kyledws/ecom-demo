@@ -7,7 +7,7 @@
   "env": {
     "es6": true
   },
-  "plugins": ["@typescript-eslint", "ava", "functional", "react"],
+  "plugins": ["@typescript-eslint", "ava", "react"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -18,6 +18,7 @@
   "rules": {
     "no-magic-numbers": "off",
     "@typescript-eslint/no-magic-numbers": "error",
+    "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-unused-vars": "off",
     "@typescript-eslint/prefer-for-of": "error",
     "@typescript-eslint/prefer-optional-chain": "error",
@@ -28,7 +29,8 @@
     "ava.config.js",
     "packages/*/build/*",
     "packages/*/dist/*",
-    "webpack.config.js"
+    "webpack.config.js",
+    "*.test.ts"
   ],
   "settings": {
     "react": {

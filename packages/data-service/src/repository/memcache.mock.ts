@@ -1,5 +1,6 @@
 type Repo = { [key: string]: string };
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const getMockMemJsClient = (repo: Repo) => {
   return class MockMemJsClient {
     repo: Repo;
@@ -39,6 +40,7 @@ export const getMockMemJsClient = (repo: Repo) => {
       return Promise.resolve(true);
     }
 
-    quit() {}
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    quit(): void {}
   };
 };

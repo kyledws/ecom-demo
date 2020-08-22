@@ -1,51 +1,58 @@
-import { Maybe } from "purify-ts";
-
-import { tryMaybeAsync } from "@package/utilities";
+import { Either, tryEitherAsync } from "@package/utilities";
 
 import { SbContent } from "./storyblok";
+import { trace } from "local/utils/debug";
 import * as Memcache from "./memcache";
 
-export const cacheContentByFullSlug = <T>(
+export const cacheContentByFullSlug = (
   fullSlug: string,
-  content: SbContent<T>,
+  content: SbContent,
   client: Memcache.Client
-): Promise<Maybe<boolean>> => {
+): Promise<Either<boolean>> => {
   return client.set(getKeyForFullSlug(fullSlug), JSON.stringify(content));
 };
 
-export const cacheContentById = <T>(
+export const cacheContentById = (
   id: number,
-  content: SbContent<T>,
+  content: SbContent,
   client: Memcache.Client
-): Promise<Maybe<boolean>> => {
+): Promise<Either<boolean>> => {
   return client.set(getKeyForId(id), JSON.stringify(content));
 };
 
-export const getContentByFullSlug = <T>(
+export const getContentByFullSlug = (
   fullSlug: string,
   client: Memcache.Client
-): Promise<Maybe<SbContent<T>>> => {
+): Promise<Either<SbContent>> => {
   const key = getKeyForFullSlug(fullSlug);
-  return tryMaybeAsync(
+  return tryEitherAsync(
     async () => {
       const res = await client.get(key);
-      return res.mapOrDefault<SbContent<T> | null>(JSON.parse, null);
+      return res.map<SbContent | null>(JSON.parse).orDefault(null);
     },
-    (e: unknown) => console.warn(`Failed to parse content for ${key}`, e)
+    (e: unknown) =>
+      trace({
+        innerError: e,
+        message: `Failed to parse content for ${key}`,
+      })
   );
 };
 
-export const getContentById = async <T>(
+export const getContentById = async (
   id: number,
   client: Memcache.Client
-): Promise<Maybe<SbContent<T>>> => {
+): Promise<Either<SbContent>> => {
   const key = getKeyForId(id);
-  return tryMaybeAsync(
+  return tryEitherAsync(
     async () => {
       const res = await client.get(key);
-      return res.mapOrDefault<SbContent<T> | null>(JSON.parse, null);
+      return res.map<SbContent | null>(JSON.parse).orDefault(null);
     },
-    (e: unknown) => console.warn(`Failed to parse content for ${key}`, e)
+    (e: unknown) =>
+      trace({
+        innerError: e,
+        message: `Failed to parse content for ${key}`,
+      })
   );
 };
 

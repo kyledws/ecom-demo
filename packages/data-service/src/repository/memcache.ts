@@ -1,7 +1,8 @@
-import { Maybe } from "purify-ts";
 import { Client as MemJsClient } from "memjs";
 
-import { tryMaybeAsync } from "@package/utilities";
+import { Either, tryEitherAsync } from "@package/utilities";
+
+import { trace } from "local/utils/debug";
 
 type ClientCreator = (url: string) => MemJsClient;
 
@@ -24,8 +25,8 @@ class Client {
     this.#client = this.#creator(this.#connectionString);
   }
 
-  async delete(key: string): Promise<Maybe<boolean>> {
-    return tryMaybeAsync(
+  async delete(key: string): Promise<Either<boolean>> {
+    return tryEitherAsync(
       async () => {
         if (!this.isConnected()) {
           this.connect();
@@ -35,12 +36,15 @@ class Client {
         return result ?? null;
       },
       (e: unknown) =>
-        console.warn(`Failed to delete key "${key}" from "${this.#connectionString}"`, e)
+        trace({
+          innerError: e,
+          message: `Failed to delete key "${key}" from "${this.#connectionString}"`,
+        })
     );
   }
 
-  async get(key: string): Promise<Maybe<string>> {
-    return tryMaybeAsync(
+  async get(key: string): Promise<Either<string>> {
+    return tryEitherAsync(
       async () => {
         if (!this.isConnected()) {
           this.connect();
@@ -51,7 +55,10 @@ class Client {
         return value ?? null;
       },
       (e: unknown) =>
-        console.warn(`Failed to get key "${key}" from "${this.#connectionString}"`, e)
+        trace({
+          innerError: e,
+          message: `Failed to get key "${key}" from "${this.#connectionString}"`,
+        })
     );
   }
 
@@ -59,8 +66,8 @@ class Client {
     return !!this.#client;
   }
 
-  async set(key: string, value: string): Promise<Maybe<boolean>> {
-    return tryMaybeAsync(
+  async set(key: string, value: string): Promise<Either<boolean>> {
+    return tryEitherAsync(
       async () => {
         if (!this.isConnected()) {
           this.connect();
@@ -70,7 +77,10 @@ class Client {
         return result ?? null;
       },
       (e: unknown) =>
-        console.warn(`Failed to set key "${key}" in "${this.#connectionString}"`, e)
+        trace({
+          innerError: e,
+          message: `Failed to set key "${key}" from "${this.#connectionString}"`,
+        })
     );
   }
 }
