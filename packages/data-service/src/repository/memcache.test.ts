@@ -54,10 +54,10 @@ test("MemcacheClient get: key exists", async (c: ExecutionContext) => {
   const mockMemJsClient = Mock.getMockMemJsClient(repo);
   const client = Test.getClient("", mockMemJsClient.create as any);
 
-  const maybe = await client.get("key");
+  const either = await client.get("key");
 
-  c.is(maybe.isRight(), true);
-  c.is(maybe.extract(), "mockGet");
+  c.is(either.isRight(), true);
+  c.is(either.extract(), "mockGet");
 });
 
 test("MemcacheClient set: no key", async (c: ExecutionContext) => {
@@ -68,10 +68,10 @@ test("MemcacheClient set: no key", async (c: ExecutionContext) => {
 
   c.is(repo["key"], undefined);
 
-  const maybe = await client.set("key", "mockSet");
+  const either = await client.set("key", "mockSet");
 
-  c.is(maybe.isRight(), true);
-  c.is(maybe.extract(), true);
+  c.is(either.isRight(), true);
+  c.is(either.extract(), true);
   c.is(repo["key"], "mockSet");
 });
 
@@ -83,9 +83,9 @@ test("MemcacheClient set: key exists", async (c: ExecutionContext) => {
 
   c.is(repo.key, "mockSet1");
 
-  const maybe = await client.set("key", "mockSet2");
+  const either = await client.set("key", "mockSet2");
 
-  c.is(maybe.isRight(), true);
-  c.is(maybe.extract(), true);
+  c.is(either.isRight(), true);
+  c.is(either.extract(), true);
   c.is(repo.key, "mockSet2");
 });
