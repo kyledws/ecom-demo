@@ -9,16 +9,6 @@ const HTTP_OKAY = 200;
 const HTTP_METHOD_NOT_ALLOWED = 405;
 const HTTP_NOT_FOUND = 404;
 
-const query = gql`
-  query($site: Site, $fullSlug: String) {
-    page(site: $site, fullSlug: $fullSlug) {
-      seoMetadata {
-        pageTitle
-      }
-    }
-  }
-`;
-
 const apolloClient = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({ fetch, uri: Env.DATA_SERVICE }),
@@ -26,22 +16,22 @@ const apolloClient = new ApolloClient({
 });
 
 export const page: APIGatewayProxyHandlerV2 = async (event, context, callback) => {
-  const url = /\/(?<path>\w*)/.exec(event.rawPath);
-  const variables = { fullSlug: "full/slug", site: "TOURS" };
-  const result = await apolloClient.query({ query, variables });
-  const { page } = result.data;
+  const { page } = { page: {} };
   if (page) {
     const context = JSON.parse(JSON.stringify(""));
     const body = await getPage({
-      ...page,
       app: "tours",
       apolloClient,
       context,
       title: "Title",
+      type: "home",
     });
     if (body.isJust()) {
       return {
         body: body.extract(),
+        headers: {
+          "content-type": "text/html",
+        },
         statusCode: HTTP_OKAY,
       };
     } else {

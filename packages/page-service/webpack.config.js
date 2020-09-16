@@ -2,7 +2,7 @@ const path = require("path");
 
 module.exports = {
   devtool: "eval-cheap-module-source-map",
-  entry: "./build/home.js",
+  entry: "./build/handler.js",
   mode: "development",
   module: {
     rules: [
@@ -14,11 +14,13 @@ module.exports = {
     ],
   },
   output: {
-    filename: "home.js",
+    filename: "handler.js",
+    libraryTarget: "commonjs2",
     path: path.resolve(__dirname, "dist"),
   },
   stats: {
     warningsFilter: [/Failed to parse source map/],
   },
+  target: "node",
   watch: true,
 };

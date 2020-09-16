@@ -14,5 +14,6 @@ build
 aws-creds.txt
 
 */**/.env
+*/**/.env.json
 
 .serverless_plugins

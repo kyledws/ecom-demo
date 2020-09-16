@@ -1,6 +1,6 @@
 import { ApolloClient, NormalizedCacheObject } from "@apollo/client";
 import { renderToStringWithData } from "@apollo/client/react/ssr";
-import { Maybe } from "purify-ts";
+import { Maybe } from "purify-ts/es";
 import React from "react";
 import ReactSSR from "react-dom/server";
 import { ServerStyleSheet } from "styled-components";
@@ -41,6 +41,7 @@ export function getPage<Context>(args: GetPageArgs<Context>): Promise<Maybe<stri
       } as Serializable;
 
       const LayoutMaybe = match(type, [[equals("home"), () => Home]]);
+
       if (LayoutMaybe.isNothing()) {
         return null;
       }
@@ -49,6 +50,7 @@ export function getPage<Context>(args: GetPageArgs<Context>): Promise<Maybe<stri
       const html = ReactSSR.renderToStaticMarkup(
         <Layout body={body} state={appState} styles={styles} title={title} />
       );
+      console.log(html);
       return `<!doctyle html>${html}`;
     },
     (e: unknown) => console.log("getPage", e)

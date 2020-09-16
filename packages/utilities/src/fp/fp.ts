@@ -1,4 +1,4 @@
-import { Either, Left, Maybe, Right } from "purify-ts";
+import { Either, Left, Maybe, Right } from "purify-ts/es";
 
 export const equals = <T>(first: T): ((second: T) => boolean) => (second: T): boolean =>
   first === second;

@@ -1,0 +1,45 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Data service
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  DataServiceFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: dist/
+      Handler: handler.graphql
+      Runtime: nodejs12.x
+      Events:
+        DataService:
+          Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
+          Properties:
+            Path: /data
+            Method: post
+      Environment:
+        Variables:
+          DEBUG_TRACING: ""
+          SAMPLE_DATA_ENDPOINT: ""
+          SAMPLE_CONTENT_ENDPOINT: ""
+          STORYBLOK_MEMCACHE_CONNECTION_STRING: ""
+          STORYBLOK_PUBLIC_ACCESS_TOKEN: ""
+          STORYBLOK_PRIVATE_ACCESS_TOKEN: ""
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  DataServiceApi:
+    Description: "API Gateway endpoint URL for Prod stage for Data Service function"
+    Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/data/"
+  DataServiceFunction:
+    Description: "Data Service Lambda Function ARN"
+    Value: !GetAtt DataServiceFunction.Arn
+  DataServiceFunctionIamRole:
+    Description: "Implicit IAM Role created for Data Service function"
+    Value: !GetAtt DataServiceFunctionRole.Arn
