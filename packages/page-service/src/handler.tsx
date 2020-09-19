@@ -1,5 +1,7 @@
+import AWS from "aws-sdk";
 import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { ApolloClient, HttpLink, InMemoryCache, gql } from "@apollo/client";
+import { GraphQLClient } from "graphql-hooks";
+import gqlMemCache from "graphql-hooks-memcache";
 import fetch from "cross-fetch";
 
 import { getPage } from "local/utils/page";
@@ -9,10 +11,11 @@ const HTTP_OKAY = 200;
 const HTTP_METHOD_NOT_ALLOWED = 405;
 const HTTP_NOT_FOUND = 404;
 
-const apolloClient = new ApolloClient({
-  cache: new InMemoryCache(),
-  link: new HttpLink({ fetch, uri: Env.DATA_SERVICE }),
+const gqlClient = new GraphQLClient({
+  cache: gqlMemCache(),
+  fetch,
   ssrMode: true,
+  url: "http://host.docker.internal:1000",
 });
 
 export const page: APIGatewayProxyHandlerV2 = async (event, context, callback) => {
@@ -21,7 +24,7 @@ export const page: APIGatewayProxyHandlerV2 = async (event, context, callback) =
     const context = JSON.parse(JSON.stringify(""));
     const body = await getPage({
       app: "tours",
-      apolloClient,
+      gqlClient,
       context,
       title: "Title",
       type: "home",

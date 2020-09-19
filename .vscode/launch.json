@@ -9,7 +9,7 @@
       "type": "node",
       "request": "attach",
       "address": "localhost",
-      "port": 5859,
+      "port": 5858,
       "localRoot": "${workspaceRoot}/packages/page-service/dist",
       "remoteRoot": "/var/task",
       "protocol": "inspector",

@@ -1,35 +1,42 @@
 {
   "dependencies": {
-    "@apollo/client": "3.1.5",
-    "graphql": "15.3.0",
+    "graphql-hooks": "4.5.0",
+    "graphql-hooks-memcache": "1.3.3",
+    "linaria": "2.0.0-rc.3",
     "local": "link:./build",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-is": "16.13.1",
-    "styled-components": "5.2.0",
     "tslib": "2.0.1"
   },
   "devDependencies": {
-    "@testing-library/react": "11.0.2",
+    "@babel/core": "7.11.6",
+    "@babel/preset-react": "7.10.4",
+    "@rollup/plugin-babel": "5.2.1",
+    "@rollup/plugin-commonjs": "15.0.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
+    "@testing-library/react": "11.0.4",
     "@testing-library/react-hooks": "3.4.1",
     "@types/jsdom": "16.2.4",
     "@types/react": "16.9.49",
     "@types/react-dom": "16.9.8",
-    "@types/styled-components": "5.1.3",
     "ava": "3.12.1",
     "jsdom": "16.4.0",
+    "nollup": "0.13.10",
+    "react-refresh": "0.8.3",
     "react-test-renderer": "16.13.1",
-    "source-map-loader": "1.1.0",
-    "subscriptions-transport-ws": "0.9.18",
-    "webpack": "next",
-    "webpack-cli": "3.3.12"
+    "rollup": "2.27.1",
+    "rollup-plugin-commonjs-alternate": "0.6.1",
+    "rollup-plugin-hot-css": "0.4.0",
+    "rollup-plugin-react-refresh": "0.0.2",
+    "rollup-plugin-sourcemaps": "0.6.2",
+    "rollup-plugin-terser": "7.0.2",
+    "rollup-plugin-visualizer": "4.1.1"
   },
   "private": true,
   "main": "build/entry.js",
   "name": "@package/tours",
   "scripts": {
-    "build": "webpack-cli",
-    "dev": "tsc -b -w",
-    "host": "node build/static.js"
+    "dev": "nollup -c --hot --hmr-host localhost:8080"
   }
 }

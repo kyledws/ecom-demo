@@ -1,8 +1,8 @@
-import { gql, useQuery } from "@apollo/client";
+import { useQuery } from "graphql-hooks";
 
 export const useDepartures = () => {
   return useQuery(
-    gql`
+    /* GraphQL */ `
       query($gateway: String!, $tourCode: String!) {
         departures(gateway: $gateway, tourCode: $tourCode) {
           calendarYear

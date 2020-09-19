@@ -1,18 +1,18 @@
-import { ApolloClient, ApolloProvider } from "@apollo/client";
+import { ClientContext, GraphQLClient } from "graphql-hooks";
 import React from "react";
 
-import { Departures } from "local/components";
+import { Departures } from "../Departures";
 
 type AppProps = {
-  apolloClient: ApolloClient<unknown>;
+  gqlClient: GraphQLClient;
 };
 
 export const App = (props: AppProps): React.ReactElement => {
   return (
-    <div data-reactroot="">
-      <ApolloProvider client={props.apolloClient}>
+    <div>
+      <ClientContext.Provider value={props.gqlClient}>
         <Departures />
-      </ApolloProvider>
+      </ClientContext.Provider>
     </div>
   );
 };

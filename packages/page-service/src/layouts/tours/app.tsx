@@ -6,7 +6,6 @@ import * as Env from "local/env";
 type HomeProps = {
   body: string;
   state: Serializable;
-  styles: React.ReactElement[];
   title: string;
 };
 
@@ -18,13 +17,13 @@ export const Home = (props: HomeProps): React.ReactElement => {
       <head>
         <title>{props.title}</title>
         <meta charSet="utf-8" />
-        {props.styles}
+        <link href={`${Env.WEBPACK_BUNDLE_SERVER}/styles.css`} rel="stylesheet" />
       </head>
 
       <body>
         <div id="__tours" dangerouslySetInnerHTML={{ __html: props.body }}></div>
         <script dangerouslySetInnerHTML={{ __html: stateScript }} />
-        <script src={`${Env.WEBPACK_BUNDLE_SERVER}/tours/app.js`}></script>
+        <script src={`${Env.WEBPACK_BUNDLE_SERVER}/home.js`}></script>
       </body>
     </html>
   );
