@@ -1,16 +1,14 @@
-import React from "react";
+import { h } from "preact";
 import { styled } from "linaria/react";
 
 import { useDepartures } from "./hooks";
 
 const Wrapper = styled.pre`
-  color: orange;
+  color: teal;
 `;
 
-export const Departures = (): React.ReactElement => {
+export const Departures = (): h.JSX.Element => {
   const { data, error, loading } = useDepartures();
-
-  console.log("assadfdf");
 
   //@ts-ignore
   if (loading) return <Wrapper>Loading...</Wrapper>;

@@ -1,5 +1,4 @@
-import React from "react";
-
+import { h } from "preact";
 import { Serializable } from "local/@types/json";
 import * as Env from "local/env";
 
@@ -9,7 +8,7 @@ type HomeProps = {
   title: string;
 };
 
-export const Home = (props: HomeProps): React.ReactElement => {
+export const Home = (props: HomeProps): h.JSX.Element => {
   const stringified = JSON.stringify(props.state).replace(/</g, "\\u003c");
   const stateScript = `window.__APP_STATE__=${stringified};`;
   return (

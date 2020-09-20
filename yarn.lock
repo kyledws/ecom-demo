@@ -440,15 +440,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.11.2, @babel/runtime@npm:^7.5.4":
-  version: 7.11.2
-  resolution: "@babel/runtime@npm:7.11.2"
-  dependencies:
-    regenerator-runtime: ^0.13.4
-  checksum: 2f127ad60a0f0568faa0044e5b48329d8166c7fd3a0a3ce774070010a1c441ebf5570f526dd6bb26e214fb1a01bb987ab6a4c3f60a00f04d02448939f4c61e1e
-  languageName: node
-  linkType: hard
-
 "@babel/template@npm:>=7, @babel/template@npm:^7.10.4":
   version: 7.10.4
   resolution: "@babel/template@npm:7.10.4"
@@ -635,12 +626,11 @@ __metadata:
     "@package/utilities": "workspace:*"
     "@rollup/plugin-commonjs": 15.0.0
     "@rollup/plugin-node-resolve": 9.0.0
-    "@testing-library/react": 11.0.4
+    "@rollup/plugin-virtual": 2.0.3
+    "@testing-library/preact": 2.0.0
     "@types/aws-lambda": 8.10.62
     "@types/jsdom": 16.2.4
     "@types/node": 14.11.1
-    "@types/react": 16.9.49
-    "@types/react-dom": 16.9.8
     "@yarnpkg/pnpify": 2.2.1
     ava: 3.12.1
     aws-sdk: 2.756.0
@@ -648,14 +638,12 @@ __metadata:
     dotenv: 8.2.0
     graphql-hooks: 4.5.0
     graphql-hooks-memcache: 1.3.3
-    graphql-hooks-ssr: 1.1.5
     jsdom: 16.4.0
     linaria: 2.0.0-rc.3
     local: "link:./build"
+    preact: 10.4.8
+    preact-render-to-string: 5.1.10
     purify-ts: 0.16.0-beta.5
-    react: 16.13.1
-    react-dom: 16.13.1
-    react-is: 16.13.1
     rollup: 2.27.1
     rollup-plugin-postcss: 3.1.8
     rollup-plugin-sourcemaps: 0.6.2
@@ -669,14 +657,17 @@ __metadata:
   dependencies:
     "@babel/core": 7.11.6
     "@babel/preset-react": 7.10.4
+    "@prefresh/babel-plugin": 0.1.0
+    "@prefresh/core": 0.8.1
+    "@prefresh/nollup": 1.1.0
     "@rollup/plugin-babel": 5.2.1
     "@rollup/plugin-commonjs": 15.0.0
     "@rollup/plugin-node-resolve": 9.0.0
-    "@testing-library/react": 11.0.4
-    "@testing-library/react-hooks": 3.4.1
+    "@rollup/plugin-virtual": 2.0.3
+    "@testing-library/preact": 2.0.0
+    "@testing-library/preact-hooks": 1.0.6
     "@types/jsdom": 16.2.4
-    "@types/react": 16.9.49
-    "@types/react-dom": 16.9.8
+    "@types/node": 14.11.1
     ava: 3.12.1
     graphql-hooks: 4.5.0
     graphql-hooks-memcache: 1.3.3
@@ -684,16 +675,11 @@ __metadata:
     linaria: 2.0.0-rc.3
     local: "link:./build"
     nollup: 0.13.10
-    react: 16.13.1
-    react-dom: 16.13.1
-    react-is: 16.13.1
-    react-refresh: 0.8.3
-    react-test-renderer: 16.13.1
+    preact: 10.4.8
     rollup: 2.27.1
     rollup-plugin-commonjs-alternate: 0.6.1
     rollup-plugin-hot-css: 0.4.0
     rollup-plugin-postcss: 3.1.8
-    rollup-plugin-react-refresh: 0.0.2
     rollup-plugin-sourcemaps: 0.6.2
     rollup-plugin-terser: 7.0.2
     rollup-plugin-visualizer: 4.1.1
@@ -710,6 +696,41 @@ __metadata:
     tslib: 2.0.1
   languageName: unknown
   linkType: soft
+
+"@prefresh/babel-plugin@npm:0.1.0":
+  version: 0.1.0
+  resolution: "@prefresh/babel-plugin@npm:0.1.0"
+  checksum: e8b75edb9cc577924758af75094f77a24708cb01b573c5ac96d6e9c52f2a63da2370c6323f41e6ad943483c1b7823b43099a0582f798b08bf16e1c7f82a6c01b
+  languageName: node
+  linkType: hard
+
+"@prefresh/core@npm:0.8.1, @prefresh/core@npm:^0.8.1":
+  version: 0.8.1
+  resolution: "@prefresh/core@npm:0.8.1"
+  peerDependencies:
+    preact: ^10.0.0
+  checksum: 32e142ba1d3ff38e50e822d63c4c6e4caaa6f399727b5eaf3239f83861f1883a562392c55bdae52bd8130f5d2a3dcf0b3f431d595a6514fd9227384a588dd6bf
+  languageName: node
+  linkType: hard
+
+"@prefresh/nollup@npm:1.1.0":
+  version: 1.1.0
+  resolution: "@prefresh/nollup@npm:1.1.0"
+  dependencies:
+    "@prefresh/core": ^0.8.1
+    "@prefresh/utils": ^0.3.1
+  peerDependencies:
+    preact: ^10.4.0
+  checksum: 40db1c207b30e397c7af9c9e101c9eb81e8f804cb643ca8fec8117206d66802cddfd31840695b9228013e85a57297337e21b63543e88db73c72ff42d106d3c44
+  languageName: node
+  linkType: hard
+
+"@prefresh/utils@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@prefresh/utils@npm:0.3.1"
+  checksum: d85dd866a821aaaee54e1d4ad4edbb4ec0939ee30e9147de0e92e8b6485db6580eb0ffad770b3e8b9cb3c61a1381867c684bec0556363baec6db58b833fdfd8b
+  languageName: node
+  linkType: hard
 
 "@rollup/plugin-babel@npm:5.2.1":
   version: 5.2.1
@@ -772,6 +793,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@rollup/plugin-virtual@npm:2.0.3":
+  version: 2.0.3
+  resolution: "@rollup/plugin-virtual@npm:2.0.3"
+  peerDependencies:
+    rollup: ^1.20.0||^2.0.0
+  checksum: 8cc4568e355c6a9017259fe0b369396aa0b8e7503de791627c009d4140fa3c2fde6dff2598b701ea4899d51e0b4af41b5014dfeb0558a20fecc57c5ff198051e
+  languageName: node
+  linkType: hard
+
 "@rollup/pluginutils@npm:^3.0.8, @rollup/pluginutils@npm:^3.0.9, @rollup/pluginutils@npm:^3.1.0":
   version: 3.1.0
   resolution: "@rollup/pluginutils@npm:3.1.0"
@@ -817,7 +847,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/dom@npm:^7.24.2":
+"@testing-library/dom@npm:^7.16.2":
   version: 7.24.2
   resolution: "@testing-library/dom@npm:7.24.2"
   dependencies:
@@ -832,29 +862,24 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@testing-library/react-hooks@npm:3.4.1":
-  version: 3.4.1
-  resolution: "@testing-library/react-hooks@npm:3.4.1"
-  dependencies:
-    "@babel/runtime": ^7.5.4
-    "@types/testing-library__react-hooks": ^3.3.0
+"@testing-library/preact-hooks@npm:1.0.6":
+  version: 1.0.6
+  resolution: "@testing-library/preact-hooks@npm:1.0.6"
   peerDependencies:
-    react: ">=16.9.0"
-    react-test-renderer: ">=16.9.0"
-  checksum: e1fd838173f5b879cde8a5c91c78f8e6b0b5dc85e083d037b95e9da8ae553524645d3913630163ded11ac82ec357290bcb92fb0ce97d1fe5245c91ff8d32a05b
+    "@testing-library/preact": ^1.0.2
+    preact: ^10.4.1
+  checksum: 14b5d1c89163c739213648cf65060688c42d86c52b68e6e07855f4e34921a41cd065f725f00d5b91f6df2c056c475176d80716047aec15b722e113d5bca449f9
   languageName: node
   linkType: hard
 
-"@testing-library/react@npm:11.0.4":
-  version: 11.0.4
-  resolution: "@testing-library/react@npm:11.0.4"
+"@testing-library/preact@npm:2.0.0":
+  version: 2.0.0
+  resolution: "@testing-library/preact@npm:2.0.0"
   dependencies:
-    "@babel/runtime": ^7.11.2
-    "@testing-library/dom": ^7.24.2
+    "@testing-library/dom": ^7.16.2
   peerDependencies:
-    react: "*"
-    react-dom: "*"
-  checksum: 3662df0d284b4ad0701aa86ec396652280357cccf22935c6bde02fbb9a08125c216a43c4960b188e6403f053bfa68a680d934a9ea90ff92312e16e57d6eaa986
+    preact: ">=10 || ^10.0.0-alpha.0 || ^10.0.0-beta.0"
+  checksum: 89a6134bd429afb8ddd3b43a9140ca8e4e9b9243691ad27018c05aa1bcf23b8ca9bc09de68f0a792571e5dc47a09731589691868946be7fdfed5a8fb310f3ae2
   languageName: node
   linkType: hard
 
@@ -1041,55 +1066,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/prop-types@npm:*":
-  version: 15.7.3
-  resolution: "@types/prop-types@npm:15.7.3"
-  checksum: bd0eab69d5120ad3784d0c9985f902653d5924707a7f2b3702a330e762dfd61b6494954cb54ad0c52b918ffd6f1e7e27c9270e4442bc15250de348596f2f60cb
-  languageName: node
-  linkType: hard
-
 "@types/q@npm:^1.5.1":
   version: 1.5.4
   resolution: "@types/q@npm:1.5.4"
   checksum: 1a19cf2c41648b862bd25a4c26ba33dc7206f14fcf50c5b78031b59090d21176e703cd10aff8af409eafbefcebb288607d30af765ee3859637cf3fae6e875648
-  languageName: node
-  linkType: hard
-
-"@types/react-dom@npm:16.9.8":
-  version: 16.9.8
-  resolution: "@types/react-dom@npm:16.9.8"
-  dependencies:
-    "@types/react": "*"
-  checksum: 53a223c0266178bca9161301d18ee6199e8f75f88caed5c4601c5aaedaf4c68f03bd72f6aafa979254beb20759f0b68a542ce04295d704eb67ae179769c50813
-  languageName: node
-  linkType: hard
-
-"@types/react-test-renderer@npm:*":
-  version: 16.9.3
-  resolution: "@types/react-test-renderer@npm:16.9.3"
-  dependencies:
-    "@types/react": "*"
-  checksum: 43465f5866e2636170ce8baa519aaccc3fee65bb6a312ce7099a29f88b65d10b0b2db0062e81c9aa26f6cfe17ed879a6963ef84442e57496f588c995b5c713aa
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:*":
-  version: 16.9.43
-  resolution: "@types/react@npm:16.9.43"
-  dependencies:
-    "@types/prop-types": "*"
-    csstype: ^2.2.0
-  checksum: b9d4491463ab013e0752bf6f99bd578f91504f74dfd1ebd7fbceebbdffe89762b040494a78403e249bb72d1645d2784f844890e7b1acdb3634432533ff9732fb
-  languageName: node
-  linkType: hard
-
-"@types/react@npm:16.9.49":
-  version: 16.9.49
-  resolution: "@types/react@npm:16.9.49"
-  dependencies:
-    "@types/prop-types": "*"
-    csstype: ^3.0.2
-  checksum: cf5dabe1e9c893a19a338002ac4bf5a86c9bc3cd88eb07aece54e6d2e5af35debe2a8c72d211ad9133391543ce115219cd7c7f2a6f649b81caf4548e1cc99061
   languageName: node
   linkType: hard
 
@@ -1115,15 +1095,6 @@ __metadata:
   version: 7.3.3
   resolution: "@types/semver@npm:7.3.3"
   checksum: 6dd845385b97eca6c93bca42de075ebbd5057804d2fefcd8f86cdfb02217a8b15ac17b85575615b7186d84877c2faf99bd8274f4346f9953f37ec3101992c6a5
-  languageName: node
-  linkType: hard
-
-"@types/testing-library__react-hooks@npm:^3.3.0":
-  version: 3.4.0
-  resolution: "@types/testing-library__react-hooks@npm:3.4.0"
-  dependencies:
-    "@types/react-test-renderer": "*"
-  checksum: acae19c41b5053897ebb7b203158f6ec319a1befdc349f5961d7f105fdb5c322e3e9b6d713dd99aa8e954966cebfa5f9d9309cffd929e9a84aac21391b600cd9
   languageName: node
   linkType: hard
 
@@ -3131,20 +3102,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"csstype@npm:^2.2.0":
-  version: 2.6.13
-  resolution: "csstype@npm:2.6.13"
-  checksum: 0a84ef4b068e464039ee4cc79e621a38b4b8b5c683fd12d42dbb810e6457ac454c3c7e578e4d327f958fc563fc03aec0e74b57180abd5804d6e2590ae3cf7086
-  languageName: node
-  linkType: hard
-
-"csstype@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "csstype@npm:3.0.2"
-  checksum: acf2852a3c5f5e1ed84e36526e41584e09353ee57b9bd93bf17f91bd2be60545adaf86c4439b84952d1f596149e06f9da6bb28c1d1ab883c9b2ad68e143e79f4
-  languageName: node
-  linkType: hard
-
 "currently-unhandled@npm:^0.4.1":
   version: 0.4.1
   resolution: "currently-unhandled@npm:0.4.1"
@@ -4670,16 +4627,6 @@ fsevents@~2.1.2:
   dependencies:
     tiny-lru: ^7.0.0
   checksum: f19c6bf26bc8d8f4e7be93cfdcba9b139bce9950b31688db61b7ee60d36be3fce3e4ad7ac73f07b767a9b6bc37362f1d916060403ba75862017d45c385d18726
-  languageName: node
-  linkType: hard
-
-"graphql-hooks-ssr@npm:1.1.5":
-  version: 1.1.5
-  resolution: "graphql-hooks-ssr@npm:1.1.5"
-  peerDependencies:
-    react: ^16.12.0
-    react-dom: ^16.12.0
-  checksum: 31bce8476d0f75f57efd6fd7437c004ad3495e06b545ed434eca624b9c88710de94d563fd7f9c317ef8ca2ece614445a16916dece04ffb08e914ceac4c8cdbeb
   languageName: node
   linkType: hard
 
@@ -7596,6 +7543,24 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
+"preact-render-to-string@npm:5.1.10":
+  version: 5.1.10
+  resolution: "preact-render-to-string@npm:5.1.10"
+  dependencies:
+    pretty-format: ^3.8.0
+  peerDependencies:
+    preact: ">=10"
+  checksum: 76dee7cc22c032798aed7e360b83c6ce532fac52fd821a0771d37876cf78d7d15c95e1383b914cf667019d165b4d5a6ba550387d011c0ea557147fbc2891db11
+  languageName: node
+  linkType: hard
+
+"preact@npm:10.4.8":
+  version: 10.4.8
+  resolution: "preact@npm:10.4.8"
+  checksum: f8be0e31f8f2e4267827aadb38893a9ddae2172e7b9b7a64609ea3e00fa4dc168377ae838d616352c412441f9a2b0631cc5995618d37518ad9e99c2239c817e6
+  languageName: node
+  linkType: hard
+
 "prelude-ls@npm:^1.2.1":
   version: 1.2.1
   resolution: "prelude-ls@npm:1.2.1"
@@ -7642,6 +7607,13 @@ fsevents@~2.1.2:
     ansi-styles: ^4.0.0
     react-is: ^16.12.0
   checksum: 06cdf6684cce00fd7df63bac8f29e47bcfaab1a68d41c6e7905c9fa78bfe31c52726b36891b2a3991a1cadab710de8818661464128367332183e3f0c1f86e640
+  languageName: node
+  linkType: hard
+
+"pretty-format@npm:^3.8.0":
+  version: 3.8.0
+  resolution: "pretty-format@npm:3.8.0"
+  checksum: 75603b8fa8a7520fbb24bea18869d4c5cf6ae7308637eb95e083eab07e521946bc49a22fa1ac4e567305b406e756badc7febfc1c5acc811fef236db189c511bf
   languageName: node
   linkType: hard
 
@@ -7876,49 +7848,14 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"react-dom@npm:16.13.1":
-  version: 16.13.1
-  resolution: "react-dom@npm:16.13.1"
-  dependencies:
-    loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    scheduler: ^0.19.1
-  peerDependencies:
-    react: ^16.13.1
-  checksum: fb5c3ad41360c6a8674f33916aa895d05e79d063d31a6963074220c1cda9e07e880799d01670b4ebd570b4d3457584f13cc898b5033a05641e8e801f5611607e
-  languageName: node
-  linkType: hard
-
-"react-is@npm:16.13.1, react-is@npm:^16.12.0, react-is@npm:^16.8.1, react-is@npm:^16.8.3, react-is@npm:^16.8.6":
+"react-is@npm:^16.12.0, react-is@npm:^16.8.1, react-is@npm:^16.8.3":
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: 11bcf1267a314a522615f626f3ce3727a3a24cdbf61c4d452add3550a7875326669631326cfb1ba3e92b6f72244c32ffecf93ad21c0cad8455d3e169d0e3f060
   languageName: node
   linkType: hard
 
-"react-refresh@npm:0.8.3":
-  version: 0.8.3
-  resolution: "react-refresh@npm:0.8.3"
-  checksum: 38f06df8e0a20701b96e5d680838a3528d66cfb53db79843d30cb9517df3262ec596607147439975267bf0634bee77101db37298ea79b5742cc28664632f3c76
-  languageName: node
-  linkType: hard
-
-"react-test-renderer@npm:16.13.1":
-  version: 16.13.1
-  resolution: "react-test-renderer@npm:16.13.1"
-  dependencies:
-    object-assign: ^4.1.1
-    prop-types: ^15.6.2
-    react-is: ^16.8.6
-    scheduler: ^0.19.1
-  peerDependencies:
-    react: ^16.13.1
-  checksum: e9c3c068d09a4252103eed270635d05897e23cbb86c6f0f74beced9345ed1b94a0fff44f16f97526e6f7a8337669156616e1e02eacb6d7b8f40295c92d91be12
-  languageName: node
-  linkType: hard
-
-"react@npm:*, react@npm:16.13.1":
+"react@npm:*":
   version: 16.13.1
   resolution: "react@npm:16.13.1"
   dependencies:
@@ -8298,15 +8235,6 @@ fsevents@~2.1.2:
   languageName: node
   linkType: hard
 
-"rollup-plugin-react-refresh@npm:0.0.2":
-  version: 0.0.2
-  resolution: "rollup-plugin-react-refresh@npm:0.0.2"
-  peerDependencies:
-    react-refresh: ^0.8.2
-  checksum: 4cb9116c8f07f546d0fae8608bf98d5a20ee9db7bce61e8479baa3856b22c71107384937560c619932dc690b8027fe7a19c82ea589a324760c3b7d961c1db249
-  languageName: node
-  linkType: hard
-
 "rollup-plugin-sourcemaps@npm:0.6.2":
   version: 0.6.2
   resolution: "rollup-plugin-sourcemaps@npm:0.6.2"
@@ -8438,16 +8366,6 @@ fsevents@~2.1.2:
   dependencies:
     xmlchars: ^2.2.0
   checksum: 6ad14be68da9b84af0fa3de346fd78bd3a8e8a73a462e2852279a1fff1e2619988919294001abe3ecef3783f9498962a0619d960ccca4ec2ca914526fde1acc2
-  languageName: node
-  linkType: hard
-
-"scheduler@npm:^0.19.1":
-  version: 0.19.1
-  resolution: "scheduler@npm:0.19.1"
-  dependencies:
-    loose-envify: ^1.1.0
-    object-assign: ^4.1.1
-  checksum: 804f990b9f370cca6d42b65f3cba2cc2bfed4973ee5623bed1ea36a6627842db8c891e2e5ac003f06f9ee892d1d3396921e27fa077346caf0213af05776e8dee
   languageName: node
   linkType: hard
 

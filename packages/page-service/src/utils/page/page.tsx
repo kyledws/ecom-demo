@@ -1,12 +1,12 @@
 import { GraphQLClient } from "graphql-hooks";
-import { getInitialState } from "graphql-hooks-ssr";
+import { h } from "preact";
 import { Maybe } from "purify-ts/es";
-import React from "react";
-import ReactSSR from "react-dom/server";
+import render from "preact-render-to-string";
 
 import { Components as Tours } from "@package/tours";
 import { equals, match, tryMaybeAsync } from "@package/utilities";
 
+import { getInitialState } from "../ssr";
 import { Home } from "local/layouts/tours";
 import { Serializable } from "local/@types/json";
 
@@ -29,8 +29,8 @@ export function getPage<Context>(args: GetPageArgs<Context>): Promise<Maybe<stri
       const AppComponent = AppComponentMaybe.unsafeCoerce();
       const App = <AppComponent gqlClient={gqlClient} />;
 
-      const gqlCache = await getInitialState({ App, client: gqlClient });
-      const body = ReactSSR.renderToString(App);
+      const gqlCache = await getInitialState({ App, client: gqlClient, render });
+      const body = render(App);
 
       const appState = {
         ...context,
@@ -44,9 +44,7 @@ export function getPage<Context>(args: GetPageArgs<Context>): Promise<Maybe<stri
       }
       const Layout = LayoutMaybe.unsafeCoerce();
 
-      const html = ReactSSR.renderToStaticMarkup(
-        <Layout body={body} state={appState} title={title} />
-      );
+      const html = render(<Layout body={body} state={appState} title={title} />);
       return `<!doctyle html>${html}`;
     },
     (e: unknown) => console.log("getPage", e)

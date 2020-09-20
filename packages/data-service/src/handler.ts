@@ -39,6 +39,10 @@ export const graphql: APIGatewayProxyHandlerV2 = async (event) => {
 
   return {
     body: JSON.stringify(data),
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    },
     statusCode: 200,
   };
 };

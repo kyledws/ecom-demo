@@ -4,8 +4,9 @@ import postcss from "rollup-plugin-postcss";
 import hotcss from "rollup-plugin-hot-css";
 import linaria from "linaria/rollup";
 import nodeResolve from "@rollup/plugin-node-resolve";
-import refresh from "rollup-plugin-react-refresh";
+import prefresh from "@prefresh/nollup";
 import sourcemaps from "rollup-plugin-sourcemaps";
+import virtual from "@rollup/plugin-virtual";
 import visualizer from "rollup-plugin-visualizer";
 import { terser } from "rollup-plugin-terser";
 
@@ -16,30 +17,40 @@ let config = {
     dir: "dist",
     entryFileNames: "[name].js",
     format: "esm",
-    // sourcemap: true,
+    sourcemap: true,
   },
   plugins: [
-    // sourcemaps(),
+    sourcemaps(),
     linaria({
       sourceMap: true,
     }),
-    // hotcss({
-    //   file: "styles.css",
-    //   hot: true,
-    // }),
-    postcss({
-      output: "styles.css",
+    hotcss({
+      file: "styles.css",
+      hot: true,
     }),
+    // postcss({
+    //   output: "styles.css",
+    // }),
     babel(),
+    virtual({
+      react: `
+          export * from "preact/compat"
+          export {default} from "preact/compat"
+          `,
+      "react-dom": `
+          export * from "preact/compat"
+          export {default} from "preact/compat"
+          `,
+    }),
     commonjs({
       define: {
-        "process.env.NODE_ENV": JSON.stringify("production"),
+        "process.env.NODE_ENV": JSON.stringify("development"),
       },
     }),
     nodeResolve(),
-    terser(),
-    visualizer(),
-    // refresh(),
+    // terser(),
+    // visualizer(),
+    prefresh(),
   ],
 };
 

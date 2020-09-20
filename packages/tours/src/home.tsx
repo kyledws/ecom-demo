@@ -1,7 +1,6 @@
 import { GraphQLClient } from "graphql-hooks";
 import gqlMemCache from "graphql-hooks-memcache";
-import React from "react";
-import ReactDOM from "react-dom";
+import { h, render } from "preact";
 
 import { App } from "local/components";
 
@@ -10,10 +9,9 @@ declare const window: Window & {
   __APP_STATE__: any;
   // eslint-disable-next-line  @typescript-eslint/no-explicit-any
   Buffer: any;
-  process: any;
 };
 
-const container = document.querySelector("#__tours");
+const container: Element = document.querySelector("#__tours") as Element;
 
 const gqlClient = new GraphQLClient({
   cache: gqlMemCache({
@@ -26,4 +24,4 @@ const gqlClient = new GraphQLClient({
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 window.Buffer = function () {};
 
-ReactDOM.hydrate(<App gqlClient={gqlClient} />, container);
+render(<App gqlClient={gqlClient} />, container);
