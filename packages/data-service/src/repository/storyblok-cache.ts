@@ -1,4 +1,4 @@
-import { Either, tryEitherAsync } from "@package/utilities";
+import { TryResult, tryResultAsync } from "@package/utilities";
 
 import { SbContent } from "./storyblok";
 import { trace } from "local/utils/debug";
@@ -8,7 +8,7 @@ export const cacheContentByFullSlug = (
   fullSlug: string,
   content: SbContent,
   client: Memcache.Client
-): Promise<Either<boolean>> => {
+): Promise<TryResult<boolean>> => {
   return client.set(getKeyForFullSlug(fullSlug), JSON.stringify(content));
 };
 
@@ -16,19 +16,19 @@ export const cacheContentById = (
   id: number,
   content: SbContent,
   client: Memcache.Client
-): Promise<Either<boolean>> => {
+): Promise<TryResult<boolean>> => {
   return client.set(getKeyForId(id), JSON.stringify(content));
 };
 
 export const getContentByFullSlug = (
   fullSlug: string,
   client: Memcache.Client
-): Promise<Either<SbContent>> => {
+): Promise<TryResult<SbContent>> => {
   const key = getKeyForFullSlug(fullSlug);
-  return tryEitherAsync(
+  return tryResultAsync(
     async () => {
       const res = await client.get(key);
-      return res.map<SbContent | null>(JSON.parse).orDefault(null);
+      return res.map<SbContent | null>(JSON.parse).unwrapOr(null);
     },
     (e: unknown) =>
       trace({
@@ -41,12 +41,12 @@ export const getContentByFullSlug = (
 export const getContentById = async (
   id: number,
   client: Memcache.Client
-): Promise<Either<SbContent>> => {
+): Promise<TryResult<SbContent>> => {
   const key = getKeyForId(id);
-  return tryEitherAsync(
+  return tryResultAsync(
     async () => {
       const res = await client.get(key);
-      return res.map<SbContent | null>(JSON.parse).orDefault(null);
+      return res.map<SbContent | null>(JSON.parse).unwrapOr(null);
     },
     (e: unknown) =>
       trace({

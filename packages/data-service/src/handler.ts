@@ -9,9 +9,9 @@ import { Memcache } from "./repository";
 import { ResolverContext, schema } from "local/schema";
 import * as Env from "local/env";
 
-const contentClient = new GraphQLClient(Env.SAMPLE_CONTENT_ENDPOINT);
+const contentClient = new GraphQLClient("");
 
-const dataClient = new GraphQLClient(Env.SAMPLE_DATA_ENDPOINT);
+const dataClient = new GraphQLClient("");
 
 const sbClient = new StoryblokClient({
   accessToken: Env.STORYBLOK_PUBLIC_ACCESS_TOKEN,

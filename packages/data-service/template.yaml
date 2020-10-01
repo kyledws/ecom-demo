@@ -27,6 +27,10 @@ Resources:
             Method: post
       Environment:
         Variables:
+          APPLE_MUSIC_IDENTIFIER: ""
+          APPLE_MUSIC_KEY_ID: ""
+          APPLE_MUSIC_PRIVATE_KEY: ""
+          APPLE_MUSIC_TEAM_ID: ""
           DEBUG_TRACING: ""
           SAMPLE_DATA_ENDPOINT: ""
           SAMPLE_CONTENT_ENDPOINT: ""

@@ -1,14 +1,6 @@
 {
-  "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "4.1.1",
-    "@typescript-eslint/parser": "4.1.1",
-    "ava": "3.12.1",
-    "eslint": "7.9.0",
-    "eslint-config-prettier": "6.11.0",
-    "eslint-plugin-ava": "11.0.0",
-    "eslint-plugin-react": "7.20.6",
-    "prettier": "2.1.2",
-    "typescript": "4.0.3"
+  "dependencies": {
+    "preact": "10.5.2"
   },
   "dependenciesMeta": {
     "linaria": {
@@ -18,20 +10,36 @@
       "unplugged": true
     }
   },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "4.3.0",
+    "@typescript-eslint/parser": "4.3.0",
+    "ava": "3.13.0",
+    "eslint": "7.10.0",
+    "eslint-config-prettier": "6.12.0",
+    "eslint-plugin-ava": "11.0.0",
+    "eslint-plugin-react": "7.21.2",
+    "esm": "3.2.25",
+    "prettier": "2.1.2",
+    "typescript": "4.0.3"
+  },
   "name": "caching",
   "private": true,
+  "resolutions": {
+    "react": "link:./preact-compat.js",
+    "react-dom": "link:./preact-compat.js"
+  },
   "scripts": {
     "build:clean": "tsc -b --clean",
     "build:data": "yarn workspace @package/data-service run build",
+    "build:music": "yarn workspace @package/music run build",
     "build:page": "yarn workspace @package/page-service run build",
-    "build:tours": "yarn workspace @package/tours run build",
     "build:watch": "tsc -b -w",
     "dev:data": "yarn workspace @package/data-service run dev",
+    "dev:music": "yarn workspace @package/music run dev",
     "dev:page": "yarn workspace @package/page-service run dev",
-    "dev:tours": "yarn workspace @package/tours run dev",
     "lint": "eslint packages",
     "format": "prettier --write packages/*/src/**/*.{ts,tsx}",
-    "host": "yarn workspace @package/tours run host",
+    "host": "yarn workspace @package/music run host",
     "test": "ava"
   },
   "workspaces": [

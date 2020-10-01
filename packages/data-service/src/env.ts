@@ -1,12 +1,12 @@
-import { config } from "dotenv";
+export const APPLE_MUSIC_IDENTIFIER = process.env.APPLE_MUSIC_IDENTIFIER ?? "";
 
-config();
+export const APPLE_MUSIC_KEY_ID = process.env.APPLE_MUSIC_KEY_ID ?? "";
+
+export const APPLE_MUSIC_PRIVATE_KEY = process.env.APPLE_MUSIC_PRIVATE_KEY ?? "";
+
+export const APPLE_MUSIC_TEAM_ID = process.env.APPLE_MUSIC_TEAM_ID ?? "";
 
 export const DEBUG_TRACING = process.env.DEBUG_TRACING === "true";
-
-export const SAMPLE_DATA_ENDPOINT = process.env.SAMPLE_DATA_ENDPOINT ?? "";
-
-export const SAMPLE_CONTENT_ENDPOINT = process.env.SAMPLE_CONTENT_ENDPOINT ?? "";
 
 export const STORYBLOK_MEMCACHE_CONNECTION_STRING =
   process.env.STORYBLOK_MEMCACHE_CONNECTION_STRING ?? "";

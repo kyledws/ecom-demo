@@ -1,1 +1,0 @@
-export { ItineraryDay } from "./type";

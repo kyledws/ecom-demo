@@ -1,9 +1,7 @@
 import * as TG from "type-graphql";
 
 export enum Website {
-  ACCOUNT,
-  CHECKOUT,
-  TOURS,
+  MUSIC,
 }
 
 TG.registerEnumType(Website, {

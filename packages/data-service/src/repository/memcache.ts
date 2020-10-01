@@ -1,6 +1,6 @@
 import { Client as MemJsClient } from "memjs";
 
-import { Either, tryEitherAsync } from "@package/utilities";
+import { TryResult, tryResultAsync } from "@package/utilities";
 
 import { trace } from "local/utils/debug";
 
@@ -25,8 +25,8 @@ class Client {
     this.#client = this.#creator(this.#connectionString);
   }
 
-  async delete(key: string): Promise<Either<boolean>> {
-    return tryEitherAsync(
+  async delete(key: string): Promise<TryResult<boolean>> {
+    return tryResultAsync(
       async () => {
         if (!this.isConnected()) {
           this.connect();
@@ -43,8 +43,8 @@ class Client {
     );
   }
 
-  async get(key: string): Promise<Either<string>> {
-    return tryEitherAsync(
+  async get(key: string): Promise<TryResult<string>> {
+    return tryResultAsync(
       async () => {
         if (!this.isConnected()) {
           this.connect();
@@ -66,8 +66,8 @@ class Client {
     return !!this.#client;
   }
 
-  async set(key: string, value: string): Promise<Either<boolean>> {
-    return tryEitherAsync(
+  async set(key: string, value: string): Promise<TryResult<boolean>> {
+    return tryResultAsync(
       async () => {
         if (!this.isConnected()) {
           this.connect();

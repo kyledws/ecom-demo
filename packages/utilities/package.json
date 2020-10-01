@@ -1,10 +1,10 @@
 {
   "dependencies": {
-    "purify-ts": "0.16.0-beta.5",
+    "monads": "npm:@hqoss/monads@0.4.0",
     "tslib": "2.0.1"
   },
   "devDependencies": {
-    "ava": "3.11.1"
+    "ava": "3.13.0"
   },
   "main": "build/index.js",
   "name": "@package/utilities",

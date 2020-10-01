@@ -1,42 +1,40 @@
 {
   "dependencies": {
     "@package/utilities": "workspace:*",
+    "axios": "0.20.0",
     "class-validator": "0.12.2",
-    "dotenv": "8.2.0",
     "graphql": "15.3.0",
     "graphql-request": "3.1.0",
     "graphql-tag": "2.11.0",
+    "jws": "4.0.0",
     "local": "link:./build",
     "memjs": "1.2.2",
-    "purify-ts": "0.16.0-beta.5",
+    "monads": "npm:@hqoss/monads@0.4.0",
+    "node-fetch": "3.0.0-beta.9",
     "reflect-metadata": "0.1.13",
-    "storyblok-js-client": "2.5.2",
+    "storyblok-js-client": "3.1.0",
     "tslib": "2.0.1",
     "type-graphql": "1.0.0"
   },
   "devDependencies": {
-    "@rollup/plugin-commonjs": "15.0.0",
+    "@rollup/plugin-commonjs": "15.1.0",
     "@rollup/plugin-json": "4.1.0",
     "@rollup/plugin-node-resolve": "9.0.0",
-    "@types/aws-lambda": "8.10.62",
-    "@types/dotenv": "8.2.0",
+    "@types/aws-lambda": "8.10.63",
+    "@types/jws": "3.2.2",
     "@types/memjs": "1.2.1",
-    "@types/node": "14.11.1",
+    "@types/node": "14.11.2",
     "@yarnpkg/pnpify": "2.2.1",
-    "ava": "3.12.1",
-    "rollup": "2.27.1",
+    "ava": "3.13.0",
+    "rollup": "2.28.2",
     "rollup-plugin-sourcemaps": "0.6.2",
-    "ts-node": "9.0.0",
     "typescript": "4.0.3"
   },
   "main": "dist/handler.js",
   "name": "@package/data-service",
   "private": true,
-  "resolutions": {
-    "class-validator": "0.12.2"
-  },
   "scripts": {
     "build": "rollup -c --watch",
-    "dev": "sam local start-api -p 1000 -n .env.json"
+    "dev": "sam local start-api -p 1000 -n .env.json --skip-pull-image"
   }
 }

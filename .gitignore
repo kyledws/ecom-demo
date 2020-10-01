@@ -17,3 +17,5 @@ aws-creds.txt
 */**/.env.json
 
 .serverless_plugins
+
+AuthKey*

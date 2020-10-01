@@ -1,4 +1,4 @@
-import { Either, Left, Maybe, Right } from "purify-ts/es";
+import { Err, None, Ok, Option, Result, Some } from "monads";
 
 export const equals = <T>(first: T): ((second: T) => boolean) => (second: T): boolean =>
   first === second;
@@ -7,68 +7,66 @@ type Matcher<V, R> = [(needle: V) => boolean, () => R];
 
 const MATCHER_INDEX = 1;
 
-export const match = <V, R>(needle: V, matchers: Matcher<V, R>[]): Maybe<R> => {
+export const match = <V, R>(needle: V, matchers: Matcher<V, R>[]): Option<R> => {
   const matcher = matchers.find(([matcher]) => matcher(needle));
   if (matcher) {
-    return Maybe.of(matcher[MATCHER_INDEX]());
+    return Some(matcher[MATCHER_INDEX]());
   }
 
   const defaultMatcher = matchers.find(([matcher]) => matcher === null);
   if (defaultMatcher) {
-    return Maybe.of(defaultMatcher[MATCHER_INDEX]());
+    return Some(defaultMatcher[MATCHER_INDEX]());
   }
 
-  return Maybe.empty();
+  return None;
 };
 
 export const self = <T>(s: T): (() => T) => () => s;
 
-export type EitherError<T = unknown> = {
+export type TryErr<T = unknown> = {
   innerError?: T;
   message: string;
 };
 
-type EitherType<R, L = unknown> = Either<EitherError<L>, R>;
+export type TryResult<R, E = unknown> = Result<R, TryErr<E>>;
 
-export { EitherType as Either };
-
-export const tryEither = <
+export const tryResult = <
   T extends (...args: unknown[]) => R | null,
   R,
-  C extends (e: E) => EitherError<L>,
+  C extends (e: E) => TryErr<TE>,
   E = unknown,
-  L = unknown
+  TE = unknown
 >(
   tryFunction: T,
   catchFunction: C
-): Either<EitherError<L>, R> => {
+): TryResult<R, TE> => {
   try {
     const result = tryFunction();
-    return result === null ? Left({ message: "Null result" }) : Right(result);
+    return result === null ? Err({ message: "Null result" }) : Ok(result);
   } catch (e) {
-    return Left(catchFunction.call(null, e));
+    return Err(catchFunction.call(null, e));
   }
 };
 
-export const tryEitherAsync = async <
+export const tryResultAsync = async <
   T extends (...args: unknown[]) => Promise<R | null>,
   R,
-  C extends (e: E) => EitherError<L>,
+  C extends (e: E) => TryErr<TE>,
   E = unknown,
-  L = unknown
+  TE = unknown
 >(
   tryFunction: T,
   catchFunction: C
-): Promise<Either<EitherError<L>, R>> => {
+): Promise<TryResult<R, TE>> => {
   try {
     const result = await tryFunction();
-    return result === null ? Left({ message: "Null result" }) : Right(result);
+    return result === null ? Err({ message: "Null result" }) : Ok(result);
   } catch (e) {
-    return Left(catchFunction.call(null, e));
+    return Err(catchFunction.call(null, e));
   }
 };
 
-export const tryMaybe = <
+export const tryOption = <
   T extends (...args: unknown[]) => R | null,
   R,
   C extends (e: E) => void,
@@ -76,17 +74,17 @@ export const tryMaybe = <
 >(
   tryFunction: T,
   catchFunction?: C
-): Maybe<R> => {
+): Option<R> => {
   try {
     const result = tryFunction();
-    return result === null ? Maybe.empty() : Maybe.of(result);
+    return result === null ? None : Some(result);
   } catch (e) {
     catchFunction?.call(null, e);
-    return Maybe.empty();
+    return None;
   }
 };
 
-export const tryMaybeAsync = async <
+export const tryOptionAsync = async <
   T extends (...args: unknown[]) => Promise<R | null>,
   R,
   C extends (e: E) => void,
@@ -94,12 +92,12 @@ export const tryMaybeAsync = async <
 >(
   tryFunction: T,
   catchFunction?: C
-): Promise<Maybe<R>> => {
+): Promise<Option<R>> => {
   try {
     const result = await tryFunction();
-    return result === null ? Maybe.empty() : Maybe.of(result);
+    return result === null ? None : Some(result);
   } catch (e) {
     catchFunction?.call(null, e);
-    return Maybe.empty();
+    return None;
   }
 };

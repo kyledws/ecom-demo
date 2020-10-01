@@ -1,0 +1,1 @@
+export { MusicArtistPage } from "./type";

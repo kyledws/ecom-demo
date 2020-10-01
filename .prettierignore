@@ -2,3 +2,4 @@ tsconfig.json
 tsconfig.base.json
 packages/*/build
 packages/*/dist
+preact-compat.js

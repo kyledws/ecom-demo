@@ -12,8 +12,8 @@ test("cacheContentByFullSlug: no key", async (c: ExecutionContext) => {
 
   const either = await Test.cacheContentByFullSlug("mockFullSlug", {} as any, client);
 
-  c.is(either.isRight(), true);
-  c.is(either.extract(), true);
+  c.is(either.isOk(), true);
+  c.is(either.unwrap(), true);
   c.is((repo as any).storyblok_full_slug_mockFullSlug, "{}");
 });
 
@@ -27,8 +27,8 @@ test("cacheContentByFullSlug: key exists", async (c: ExecutionContext) => {
 
   const either = await Test.cacheContentByFullSlug("mockFullSlug", {} as any, client);
 
-  c.is(either.isRight(), true);
-  c.is(either.extract(), true);
+  c.is(either.isOk(), true);
+  c.is(either.unwrap(), true);
   c.is((repo as any).storyblok_full_slug_mockFullSlug, "{}");
 });
 
@@ -40,8 +40,8 @@ test("cacheContentById: no key", async (c: ExecutionContext) => {
 
   const either = await Test.cacheContentById(123, {} as any, client);
 
-  c.is(either.isRight(), true);
-  c.is(either.extract(), true);
+  c.is(either.isOk(), true);
+  c.is(either.unwrap(), true);
   c.is((repo as any).storyblok_id_123, "{}");
 });
 
@@ -55,8 +55,8 @@ test("cacheContentById: key exists", async (c: ExecutionContext) => {
 
   const either = await Test.cacheContentById(123, {} as any, client);
 
-  c.is(either.isRight(), true);
-  c.is(either.extract(), true);
+  c.is(either.isOk(), true);
+  c.is(either.unwrap(), true);
   c.is(repo.storyblok_id_123, "{}");
 });
 
@@ -68,8 +68,8 @@ test("getContentByFullSlug: no key", async (c: ExecutionContext) => {
 
   const either = await Test.getContentByFullSlug("mockFullSlug", client);
 
-  c.is(either.isLeft(), true);
-  c.deepEqual(either.extract(), {
+  c.is(either.isErr(), true);
+  c.deepEqual(either.unwrapErr(), {
     message: "Null result",
   });
 });
@@ -82,8 +82,8 @@ test("getContentByFullSlug: key exists", async (c: ExecutionContext) => {
 
   const either = await Test.getContentByFullSlug("mockFullSlug", client);
 
-  c.is(either.isRight(), true);
-  c.deepEqual(either.extract(), {} as any);
+  c.is(either.isOk(), true);
+  c.deepEqual(either.unwrap(), {} as any);
 });
 
 test("getContentByFullSlug: malformed json", async (c: ExecutionContext) => {
@@ -94,8 +94,8 @@ test("getContentByFullSlug: malformed json", async (c: ExecutionContext) => {
 
   const either = await Test.getContentByFullSlug("mockFullSlug", client);
 
-  c.is(either.isLeft(), true);
-  c.deepEqual(either.extract(), {
+  c.is(either.isErr(), true);
+  c.deepEqual(either.unwrapErr(), {
     innerError: new SyntaxError("Unexpected token m in JSON at position 0"),
     message: "Failed to parse content for storyblok_full_slug_mockFullSlug",
   });
@@ -109,8 +109,8 @@ test("getContentById: no key", async (c: ExecutionContext) => {
 
   const either = await Test.getContentById(123, client);
 
-  c.is(either.isLeft(), true);
-  c.deepEqual(either.extract(), {
+  c.is(either.isErr(), true);
+  c.deepEqual(either.unwrapErr(), {
     message: "Null result",
   });
 });
@@ -123,8 +123,8 @@ test("getContentById: key exists", async (c: ExecutionContext) => {
 
   const either = await Test.getContentById(123, client);
 
-  c.is(either.isRight(), true);
-  c.deepEqual(either.extract(), {} as any);
+  c.is(either.isOk(), true);
+  c.deepEqual(either.unwrap(), {} as any);
 });
 
 test("getContentById: malformed json", async (c: ExecutionContext) => {
@@ -135,8 +135,8 @@ test("getContentById: malformed json", async (c: ExecutionContext) => {
 
   const either = await Test.getContentById(123, client);
 
-  c.is(either.isLeft(), true);
-  c.deepEqual(either.extract(), {
+  c.is(either.isErr(), true);
+  c.deepEqual(either.unwrapErr(), {
     innerError: new SyntaxError("Unexpected token m in JSON at position 0"),
     message: "Failed to parse content for storyblok_id_123",
   });

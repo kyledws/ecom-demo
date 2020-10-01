@@ -1,13 +1,13 @@
 import { GraphQLClient } from "graphql-hooks";
+import { Option } from "monads";
 import { h } from "preact";
-import { Maybe } from "purify-ts/es";
 import render from "preact-render-to-string";
 
-import { Components as Tours } from "@package/tours";
-import { equals, match, tryMaybeAsync } from "@package/utilities";
+import { Components as Music } from "@package/music";
+import { equals, match, tryOptionAsync } from "@package/utilities";
 
 import { getInitialState } from "../ssr";
-import { Home } from "local/layouts/tours";
+import { Home } from "local/layouts/music";
 import { Serializable } from "local/@types/json";
 
 type GetPageArgs<Context = unknown> = {
@@ -18,15 +18,15 @@ type GetPageArgs<Context = unknown> = {
   type: string;
 };
 
-export function getPage<Context>(args: GetPageArgs<Context>): Promise<Maybe<string>> {
+export function getPage<Context>(args: GetPageArgs<Context>): Promise<Option<string>> {
   const { app, context, gqlClient, title, type } = args;
-  return tryMaybeAsync(
+  return tryOptionAsync(
     async () => {
-      const AppComponentMaybe = match(app, [[equals("tours"), () => Tours.App]]);
-      if (AppComponentMaybe.isNothing()) {
+      const AppComponentMaybe = match(app, [[equals("music"), () => Music.App]]);
+      if (AppComponentMaybe.isNone()) {
         return null;
       }
-      const AppComponent = AppComponentMaybe.unsafeCoerce();
+      const AppComponent = AppComponentMaybe.unwrap();
       const App = <AppComponent gqlClient={gqlClient} />;
 
       const gqlCache = await getInitialState({ App, client: gqlClient, render });
@@ -39,10 +39,10 @@ export function getPage<Context>(args: GetPageArgs<Context>): Promise<Maybe<stri
 
       const LayoutMaybe = match(type, [[equals("home"), () => Home]]);
 
-      if (LayoutMaybe.isNothing()) {
+      if (LayoutMaybe.isNone()) {
         return null;
       }
-      const Layout = LayoutMaybe.unsafeCoerce();
+      const Layout = LayoutMaybe.unwrap();
 
       const html = render(<Layout body={body} state={appState} title={title} />);
       return `<!doctyle html>${html}`;

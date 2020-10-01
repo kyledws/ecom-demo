@@ -11,8 +11,8 @@ test("MemcacheClient delete: no key", async (c: ExecutionContext) => {
 
   const either = await client.delete("key");
 
-  c.is(either.isLeft(), true);
-  c.deepEqual(either.extract(), {
+  c.is(either.isErr(), true);
+  c.deepEqual(either.unwrapErr(), {
     innerError: "Key does not exist, cannot delete",
     message: 'Failed to delete key "key" from ""',
   });
@@ -28,8 +28,8 @@ test("MemcacheClient delete: key exists", async (c: ExecutionContext) => {
 
   const either = await client.delete("key");
 
-  c.is(either.isRight(), true);
-  c.is(either.extract(), true);
+  c.is(either.isOk(), true);
+  c.is(either.unwrap(), true);
   c.is(repo.key, undefined);
 });
 
@@ -41,8 +41,8 @@ test("MemcacheClient get: no key", async (c: ExecutionContext) => {
 
   const either = await client.get("key");
 
-  c.is(either.isLeft(), true);
-  c.deepEqual(either.extract(), {
+  c.is(either.isErr(), true);
+  c.deepEqual(either.unwrapErr(), {
     innerError: "Key does not exist, cannot get",
     message: 'Failed to get key "key" from ""',
   });
@@ -56,8 +56,8 @@ test("MemcacheClient get: key exists", async (c: ExecutionContext) => {
 
   const either = await client.get("key");
 
-  c.is(either.isRight(), true);
-  c.is(either.extract(), "mockGet");
+  c.is(either.isOk(), true);
+  c.is(either.unwrap(), "mockGet");
 });
 
 test("MemcacheClient set: no key", async (c: ExecutionContext) => {
@@ -70,8 +70,8 @@ test("MemcacheClient set: no key", async (c: ExecutionContext) => {
 
   const either = await client.set("key", "mockSet");
 
-  c.is(either.isRight(), true);
-  c.is(either.extract(), true);
+  c.is(either.isOk(), true);
+  c.is(either.unwrap(), true);
   c.is(repo["key"], "mockSet");
 });
 
@@ -85,7 +85,7 @@ test("MemcacheClient set: key exists", async (c: ExecutionContext) => {
 
   const either = await client.set("key", "mockSet2");
 
-  c.is(either.isRight(), true);
-  c.is(either.extract(), true);
+  c.is(either.isOk(), true);
+  c.is(either.unwrap(), true);
   c.is(repo.key, "mockSet2");
 });

@@ -23,25 +23,24 @@ export const page: APIGatewayProxyHandlerV2 = async (event, context, callback) =
   if (page) {
     const context = JSON.parse(JSON.stringify(""));
     const body = await getPage({
-      app: "tours",
+      app: "music",
       gqlClient,
       context,
       title: "Title",
       type: "home",
     });
-    if (body.isJust()) {
-      return {
-        body: body.extract(),
+    return body.match({
+      some: (b) => ({
+        body: b,
         headers: {
           "content-type": "text/html",
         },
         statusCode: HTTP_OKAY,
-      };
-    } else {
-      return {
+      }),
+      none: () => ({
         statusCode: HTTP_NOT_FOUND,
-      };
-    }
+      }),
+    });
   } else {
     return {
       statusCode: HTTP_NOT_FOUND,

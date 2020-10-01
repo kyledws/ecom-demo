@@ -1,0 +1,41 @@
+{
+  "dependencies": {
+    "graphql-hooks": "5.0.0",
+    "graphql-hooks-memcache": "2.0.0",
+    "linaria": "2.0.0-rc.3",
+    "local": "link:./build",
+    "preact": "10.5.3",
+    "tslib": "2.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "7.11.6",
+    "@babel/preset-react": "7.10.4",
+    "@prefresh/babel-plugin": "0.2.2",
+    "@prefresh/core": "1.0.0",
+    "@prefresh/nollup": "2.0.0",
+    "@rollup/plugin-babel": "5.2.1",
+    "@rollup/plugin-commonjs": "15.1.0",
+    "@rollup/plugin-node-resolve": "9.0.0",
+    "@testing-library/preact": "2.0.0",
+    "@testing-library/preact-hooks": "1.1.0",
+    "@types/jsdom": "16.2.4",
+    "@types/node": "14.11.2",
+    "ava": "3.13.0",
+    "jsdom": "16.4.0",
+    "nollup": "0.13.11",
+    "rollup": "2.28.2",
+    "rollup-plugin-commonjs-alternate": "0.6.1",
+    "rollup-plugin-hot-css": "0.4.0",
+    "rollup-plugin-postcss": "3.1.8",
+    "rollup-plugin-sourcemaps": "0.6.2",
+    "rollup-plugin-terser": "7.0.2",
+    "rollup-plugin-visualizer": "4.1.1"
+  },
+  "private": true,
+  "main": "build/entry.js",
+  "name": "@package/music",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "nollup -c --hot --hmr-host localhost:8080"
+  }
+}

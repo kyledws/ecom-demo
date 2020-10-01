@@ -1,6 +1,6 @@
 import StoryblokClient, { Story, StoryblokComponent } from "storyblok-js-client";
 
-import { Either, tryEitherAsync } from "@package/utilities";
+import { TryResult, tryResultAsync } from "@package/utilities";
 
 import { trace } from "local/utils/debug";
 import { WebpageContent as GqlContent } from "local/schema/webpage-content";
@@ -13,8 +13,8 @@ export type SbContent<C extends string = any, T = unknown> = Omit<GqlContent, "b
 export const getContentByFullSlug = (
   fullSlug: string,
   client: StoryblokClient
-): Promise<Either<SbContent>> => {
-  return tryEitherAsync(
+): Promise<TryResult<SbContent>> => {
+  return tryResultAsync(
     async () => {
       const response = await client.getStory(fullSlug);
       return getContentFromStory(response);
@@ -30,8 +30,8 @@ export const getContentByFullSlug = (
 export const getContentById = (
   id: number,
   client: StoryblokClient
-): Promise<Either<SbContent>> => {
-  return tryEitherAsync(
+): Promise<TryResult<SbContent>> => {
+  return tryResultAsync(
     async () => {
       const response = await client.getStory(id.toString());
       return getContentFromStory(response);
