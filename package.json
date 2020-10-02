@@ -25,8 +25,8 @@
   "name": "caching",
   "private": true,
   "resolutions": {
-    "react": "link:./preact-compat.js",
-    "react-dom": "link:./preact-compat.js"
+    "react": "link:./node_modules/.link/preact-compat.js",
+    "react-dom": "link:./node_modules/.link/preact-compat.js"
   },
   "scripts": {
     "build:clean": "tsc -b --clean",
@@ -39,7 +39,6 @@
     "dev:page": "yarn workspace @package/page-service run dev",
     "lint": "eslint packages",
     "format": "prettier --write packages/*/src/**/*.{ts,tsx}",
-    "host": "yarn workspace @package/music run host",
     "test": "ava"
   },
   "workspaces": [

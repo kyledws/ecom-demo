@@ -17,6 +17,7 @@ export const Home = (props: HomeProps): h.JSX.Element => {
       <body>
         <div id="__music" dangerouslySetInnerHTML={{ __html: state.body }}></div>
         <script
+          id="__app-data"
           dangerouslySetInnerHTML={{ __html: state.appState }}
           type="application/json"
         />

@@ -3,7 +3,7 @@ import fetch from "node-fetch";
 import { getDeveloperJwt } from "local/utils/authentication";
 import * as Env from "local/env";
 
-const getThing = async () => {
+export const getThing = async () => {
   const token = getDeveloperJwt({
     days: 1,
     keyId: Env.APPLE_MUSIC_KEY_ID,

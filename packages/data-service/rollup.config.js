@@ -1,6 +1,7 @@
 import commonjs from "@rollup/plugin-commonjs";
-import node_resolve from "@rollup/plugin-node-resolve";
+import externals from "rollup-plugin-node-externals";
 import json from "@rollup/plugin-json";
+import resolve from "@rollup/plugin-node-resolve";
 import sourcemaps from "rollup-plugin-sourcemaps";
 
 let config = {
@@ -10,7 +11,7 @@ let config = {
     format: "cjs",
     sourcemap: true,
   },
-  plugins: [sourcemaps(), json(), node_resolve(), commonjs()],
+  plugins: [json(), externals(), resolve(), commonjs(), sourcemaps()],
 };
 
 export default config;

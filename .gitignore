@@ -4,7 +4,8 @@
 !.yarn/sdks
 !.yarn/versions
 .pnp.*
-node_modules
+node_modules/*
+!node_modules/.link
 
 tsconfig.tsbuildinfo
 out
@@ -19,3 +20,4 @@ aws-creds.txt
 .serverless_plugins
 
 AuthKey*
+

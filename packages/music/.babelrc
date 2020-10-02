@@ -1,8 +1,9 @@
 {
-  "presets": ["@babel/preset-react"],
   "env": {
     "development": {
       "plugins": ["@prefresh/babel-plugin"]
     }
-  }
+  },
+  "inputSourceMap": true,
+  "presets": ["@babel/preset-react", "linaria/babel"]
 }

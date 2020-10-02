@@ -1,3 +1,5 @@
+import "preact/debug";
+
 import { GraphQLClient } from "graphql-hooks";
 import gqlMemCache from "graphql-hooks-memcache";
 import { h, hydrate } from "preact";
@@ -11,11 +13,12 @@ declare const window: Window & {
   Buffer: any;
 };
 
-const container: Element = document.querySelector("#__music") as Element;
+const container = document.querySelector("#__music") as Element;
+const appData = document.querySelector("#__app-data") as HTMLScriptElement;
 
 const gqlClient = new GraphQLClient({
   cache: gqlMemCache({
-    initialState: window.__APP_STATE__.gqlCache,
+    initialState: JSON.parse(appData.innerHTML),
   }),
   url: "http://127.0.0.1:1000/",
 });

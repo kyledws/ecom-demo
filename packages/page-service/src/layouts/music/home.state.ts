@@ -11,7 +11,7 @@ type HomeState = HomeProps & {
 };
 
 export const useHomeState = (props: HomeProps): HomeState => {
-  const appState = JSON.stringify(props.state).replace(/</g, "\\u003c");
+  const appState = JSON.stringify(props.state);
   return {
     ...props,
     appState,

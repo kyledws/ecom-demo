@@ -1,9 +1,10 @@
 import babel from "@rollup/plugin-babel";
-import commonjs from "rollup-plugin-commonjs-alternate";
-import postcss from "rollup-plugin-postcss";
+import cjsAlt from "rollup-plugin-commonjs-alternate";
+import commonjs from "@rollup/plugin-commonjs";
 import hotcss from "rollup-plugin-hot-css";
+import injectEnv from "rollup-plugin-inject-process-env";
 import linaria from "linaria/rollup";
-import nodeResolve from "@rollup/plugin-node-resolve";
+import resolve from "@rollup/plugin-node-resolve";
 import prefresh from "@prefresh/nollup";
 import sourcemaps from "rollup-plugin-sourcemaps";
 import visualizer from "rollup-plugin-visualizer";
@@ -18,28 +19,34 @@ let config = {
     format: "esm",
     sourcemap: true,
   },
+  watch: {
+    exclude: ["node_modules/**", ".git/**", "@prefresh"],
+  },
+
   plugins: [
-    sourcemaps(),
+    // injectEnv({
+    //   NODE_ENV: "development",
+    // }),
     linaria({
       sourceMap: true,
     }),
-    // hotcss({
-    //   file: "styles.css",
-    //   hot: true,
-    // }),
-    postcss({
-      output: "styles.css",
+    hotcss({
+      file: "styles.css",
+      hot: true,
     }),
-    babel(),
-    commonjs({
+    babel({
+      babelHelpers: "bundled",
+    }),
+    resolve(),
+    cjsAlt({
       define: {
         "process.env.NODE_ENV": JSON.stringify("development"),
       },
     }),
-    nodeResolve(),
     // terser(),
     // visualizer(),
-    //prefresh(),
+    sourcemaps(),
+    prefresh(),
   ],
 };
 
